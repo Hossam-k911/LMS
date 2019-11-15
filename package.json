@@ -5,9 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "backend":"cd backend&& nodemon server.js",
-    "frontend":"cd frontend && ng serve"
+    "backend": "cd backend&& nodemon server.js",
+    "frontend": "cd frontend && ng serve"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "mongodb": "^3.3.4"
+  }
 }

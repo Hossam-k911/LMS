@@ -11,6 +11,7 @@ var runAPIS = require('./API/index')
 app.use(express.json());
 app.use(
   session({
+    genid:uuid,
     secret: "LMS Project",
     resave: false
   })
@@ -30,7 +31,7 @@ app.get("/", (req, resp) => {
 });
 //// Authentication
 function Authenticate(req, resp, next) {
-  if (req.url === "/register" || req.url === "/signin") {
+  if (req.url === "/register" || req.url === "/signin" ) {
     next();
   } else {
     if (req.session.user && req.cookies["connect.sid"]) {
@@ -40,9 +41,9 @@ function Authenticate(req, resp, next) {
     }
   }
 }
+    
+ app.use(Authenticate);
 
-// app.use(Authenticate);
+//localhost:9090/
+app.listen(9090);
 
-//localhost:6969/
-app.listen(6969);
-// testing pushing into repo
