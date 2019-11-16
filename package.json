@@ -8,7 +8,10 @@
     "backend": "cd backend&& nodemon server.js",
     "frontend": "cd frontend && ng serve"
   },
-  "author": "",
+  "engines": {
+    "node":"10.16.3"
+  },
+  "author": "Hossam Khaled ",
   "license": "ISC",
   "dependencies": {
     "mongodb": "^3.3.4"

@@ -3,7 +3,7 @@ var patientModel = require("../../Models/MedicalModels/patient.model");
 var MedecinesModel = require("../../Models/MedicalModels/medicines.model");
 
 module.exports = function(app) {
-  app.post("/register", async (req, resp) => {
+  app.post("/api/register", async (req, resp) => {
     try {
       const {
         patient_firstName,

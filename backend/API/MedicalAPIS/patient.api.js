@@ -4,7 +4,7 @@ var MedecinesModel = require("../../Models/MedicalModels/medicines.model");
 
 module.exports = function createPatientsAPIS(app) {
   
-  app.get("/getpatients", async (req, resp) => {
+  app.get("/api/getpatients", async (req, resp) => {
     try {
       let patients = await patientModel.find({});
       resp.json({ message: "success", patients });
