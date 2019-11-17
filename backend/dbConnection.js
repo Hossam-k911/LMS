@@ -15,7 +15,7 @@ const mongoose = require("mongoose");
 
 module.exports = function dbConnection() {
   mongoose.Promise = global.Promise;
-  mongoose.connect(process.env.MONGODB_URI,  {useNewUrlParser: true ,useUnifiedTopology: true, useCreateIndex: true ,
+  mongoose.connect(process.env.MONGODB_URL,  {useNewUrlParser: true ,useUnifiedTopology: true, useCreateIndex: true ,
     auth: {
       user: process.env.MONGO_USER,
       password: process.env.MONGO_PASSWORD
