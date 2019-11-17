@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cd backend && node server.js",
-    "frontend": "cd frontend && ng serve"
+    "start": "cd backend && node server.js"
   },
   "engines": {
     "node": "10.16.3"
