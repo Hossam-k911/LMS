@@ -6,19 +6,20 @@ module.exports = function createPatientsAPIS(app) {
   app.post("/addmedecine", async (req, resp) => {
     try {
       const {
-        medicine_name,
-        medicine_price,
-        medicine_description,
-        medicine_quantity
+        medicineName,
+        medicinePrice,
+        medicineDescription,
+        medicineQuantity
       } = req.body;
       let medecine = new medicinesModel({
         _id: mongoose.Types.ObjectId(),
-        medicine_name,
-        medicine_price,
-        medicine_description,
-        medicine_quantity
+        medicineName,
+        medicinePrice,
+        medicineDescription,
+        medicineQuantity
       });
       await medecine.save();
+
       resp.json({ message: " medecine added", result: medecine });
     } catch (err) {
       resp.json({ message: "error adding medecine" });
