@@ -1,5 +1,5 @@
 //id .. firstName,last,email,password,phone,gender
-//2: 
+//2:
 
 var mongoose = require("mongoose");
 var patientModel = require("../../Models/MedicalModels/patient.model");
@@ -15,8 +15,9 @@ module.exports = function(app) {
         password,
         phone,
         gender,
-        location,
-        date
+        // location,
+        // date
+        confirm
         // medecines: medecine_id
       } = req.body;
 
@@ -28,9 +29,10 @@ module.exports = function(app) {
         email,
         password,
         phone,
-        location,
-        date,
-        gender
+        // location,
+        // date,
+        gender,
+        confirm
         // medicines: medecine_id
         //   doctors: doctor_id
       });
@@ -50,4 +52,5 @@ module.exports = function(app) {
       resp.json({ message: "error adding Patient" });
     }
   });
+  
 };
