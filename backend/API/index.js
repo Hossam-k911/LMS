@@ -1,7 +1,7 @@
  function RunAPIS(app){
-    require('./MedicalAPIS/patient.api')(app)
-    require('./MedicalAPIS/medecine.api')(app)
-    require('./Doctoroid APIS/Patients.api')(app)
+    require('./general APIS/patient.api')(app)
+    require('./general APIS/medecine.api')(app)
+    require('./Doctoroid APIS/Register.api')(app)
     // require('./ /Patients.api')(app)
     // require('./Doctoroid APIS/Patients.api')(app)
 

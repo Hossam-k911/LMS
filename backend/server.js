@@ -31,7 +31,7 @@ app.get("/", (req, resp) => {
 });
 //// Authentication
 function Authenticate(req, resp, next) {
-  if (req.url === "/register" || req.url === "/signin" ) {
+  if (req.url === "/signup" || req.url === "/signin" ) {
     next();
   } else {
     if (req.session.user && req.cookies["connect.sid"]) {

@@ -1,15 +1,4 @@
-// var mongoose = require("mongoose");
-// //  require('./.env/config')
-// module.exports = function() {
-//   mongoose.Promise = global.Promise;
-//   mongoose.connect(
-//      process.env.MONGODB_URI
-//       ,
-//     { useUnifiedTopology: true, useNewUrlParser: true }
-//   );
-// };
-// //"mongodb+srv://LMS_db:123@cluster0-2uup7.mongodb.net/lms?retryWrites=true&w=majority"
-require('dotenv').config();
+ require('dotenv').config();
 
 const mongoose = require("mongoose");
 
@@ -23,4 +12,5 @@ module.exports = function dbConnection() {
   })
     .then(db => console.log(`DB is connected`))
     .catch(err => console.error(err));
+  // mongoose.connect('mongodb://localhost:27017/LMS',{useNewUrlParser: true, useUnifiedTopology: true })
 };

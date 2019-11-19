@@ -19,7 +19,7 @@ module.exports = function createPatientsAPIS(app) {
         medicine_quantity
       });
       await medecine.save();
-      resp.json({ message: " medecine added", medecine });
+      resp.json({ message: " medecine added", result: medecine });
     } catch (err) {
       resp.json({ message: "error adding medecine" });
     }
@@ -28,7 +28,7 @@ module.exports = function createPatientsAPIS(app) {
     try{
       
    let medecines= await medicinesModel.find({})
-   resp.json({message:"success",medecines})
+   resp.json({message:"success",result:medecines})
     }
     catch(err){
    resp.json({message:"error fetching medecines"})

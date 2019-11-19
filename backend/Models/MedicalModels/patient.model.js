@@ -2,15 +2,16 @@ var mongoose = require('mongoose')
 
 var PatientsModel = new mongoose.model('Patients',{
     _id:mongoose.Schema.Types.ObjectId,
-    patient_firstName:{type:String},
-    patient_lastName:{type:String},
-    patient_email:{type:String ,require:true},
-    patient_phone:{type:String},
-    patient_password:{type:String,require:true},
-    patient_gender:{type:String},
-    patient_location:{type:String},
-    patient_date:{type:Date},
-    medicines: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Medicines' }],
+    mob_id:String,
+    firstName:{type:String},
+    lastName:{type:String},
+    email:{type:String ,require:true},
+    phone:{type:String},
+    password:{type:String,require:true},
+    gender:{type:String},
+    location:{type:String},
+    date:{type:String}
+    // medicines: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Medicines' }],
     // doctors: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Doctors' }]
 
 })
