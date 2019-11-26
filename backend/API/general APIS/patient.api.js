@@ -22,11 +22,10 @@ module.exports = function createPatientsAPIS(app) {
     }
   });
 
-  app.get('/removeallpatients', async (req, resp) => {
-    let output = await patientModel.remove({})
-    resp.json({ message:"success", result: output })
-})
-
+  app.get("/removeallpatients", async (req, resp) => {
+    let output = await patientModel.remove({});
+    resp.json({ message: "success", result: output });
+  });
 
   app.post("/getpatientbyid", async (req, resp) => {
     try {
@@ -37,28 +36,42 @@ module.exports = function createPatientsAPIS(app) {
       resp.json({ message: " recheck patient ID" });
     }
   });
-  
-  app.post('/updatepatient', async (req, resp) => {
-  try{
-    const {
-      p_id, mob_id,
-      firstName,
-      lastName,
-      email,
-      password,
-      phone,
-      gender,
-      // location,
-      // date
-  } = req.body
- 
-  let output = await patientModel.findOneAndUpdate({ _id: p_id },{mob_id,firstName,lastName,email,password,phone,gender})
-      resp.json({ message:"success",result: output })
- 
-  }catch(err){
-    resp.json({ message:"error in editing patient" })
 
-  }
-    
-})
+  app.post("/updatepatient", async (req, resp) => {
+    try {
+      const {
+        p_id,
+        mob_id,
+        firstName,
+        lastName,
+        email,
+        password,
+        phone,
+        gender,
+        location,
+        date,
+        medicines:m_id
+      } = req.body;
+
+      let output = await patientModel.findOneAndUpdate(
+        { _id: p_id },
+        {
+          mob_id,
+          firstName,
+          lastName,
+          email,
+          password,
+          phone,
+          gender,
+          location,
+          date,
+        m_id
+        }
+      );
+      await output.save();
+      resp.json({ message: "success", result: output });
+    } catch (err) {
+      resp.json({ message: "error in editing patient" });
+    }
+  });
 };
