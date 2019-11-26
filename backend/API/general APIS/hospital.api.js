@@ -37,4 +37,9 @@ module.exports = function(app) {
       
     }
   });
+
+  app.get('/hospitalinfo',async(req,resp)=>{
+    let hospital = await HospitalModel.find({});
+    resp.json({message:"success",hospital});
+  })
 };
