@@ -16,7 +16,8 @@ app.use(
     resave: false
   })
 );
-runAPIS(app);
+
+
 app.use(cookieParser());
 app.use(
   cors({
@@ -24,12 +25,8 @@ app.use(
     origin: "http://localhost:4200"
   })
 );
-dbConnection();
-
-app.get("/", (req, resp) => {
-  resp.send("LMS IS CREATED");
-});
 //// Authentication
+
 function Authenticate(req, resp, next) {
   if (req.url === "/signup" || req.url === "/signin") {
     next();
@@ -41,10 +38,15 @@ function Authenticate(req, resp, next) {
     }
   }
 }
-    
- app.use(Authenticate);
 
-//localhost:9090/
+dbConnection();
+app.use(Authenticate);
+runAPIS(app);
+
+app.get("/", (req, resp) => {
+  resp.send("LMS IS CREATED");
+});
+    
 const port = process.env.PORT||3000
 app.listen(port,()=>{
   console.log(`Started up at port ${port}`);

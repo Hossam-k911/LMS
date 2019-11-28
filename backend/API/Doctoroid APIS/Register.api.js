@@ -27,7 +27,6 @@ module.exports = function(app) {
         gender,
         confirm
       });
-      // patient.confirm === false;
       await patient.save();
       patient.confirm == false;
       resp.json({ message: "Success", patient: patient });
@@ -59,13 +58,7 @@ module.exports = function(app) {
 
       }
       
-      //  let selectedMedecine = await MedecinesModel.findOne({_id: medicine_id });
-      // selectedMedecine.patient.push(patient._id);
-      //  await selectedMedecine.save();
-      // let selectedMedecine = await MedecinesModel.findOne({ _id: d_id })
-      //  selectedMedecine.patient.push(medicines.medecine_id)
-      // let output = await selectedMedecine.save()
-  
+     
     } catch (err) {
       resp.json({ message: "error" });
     }
