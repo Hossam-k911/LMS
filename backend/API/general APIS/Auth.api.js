@@ -2,7 +2,6 @@ var PatientsModel = require('../../Models/MedicalModels/patient.model')
 var jwt = require('jsonwebtoken')
 require('dotenv').config();
 module.exports = function(app){
- 
     app.post("/signin", async (req, resp) => {
        try{
         const { email, password} = req.body;
@@ -10,12 +9,13 @@ module.exports = function(app){
         if (user) {
           //create and assign token 
           const token = jwt.sign({email:user.email},process.env.ACCESS_TOKEN_SECRET)
+    
           resp.header('x-auth-token',token).send({"x-auth-token":token});
         } else {
           resp.json({ message: "error" });
         }
        }catch(error){
-        // resp.status(error.response.status)
+           resp.status(error.response.status)
         return resp.send(error.message);
        }
       });

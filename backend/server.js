@@ -14,7 +14,7 @@ app.use(
   session({
     genid: uuid,
     secret: "LMS Project",
-    resave: false
+    resave: false,
   })
 );
 
