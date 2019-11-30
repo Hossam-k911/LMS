@@ -9,8 +9,8 @@ var PatientsModel = new mongoose.model('Patients',{
     phone:{type:String},
     password:{type:String,require:true},
     gender:{type:String},
-     location:{type:String},
-     date:{type:String},
+    location:{type:String},
+    date:{type:String},
     confirm:{type:String},
     medicines: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Medicines'}],
     // doctors: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Doctors' }]

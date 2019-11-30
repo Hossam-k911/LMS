@@ -7,6 +7,7 @@ var cors = require("cors");
 var cookieParser = require("cookie-parser");
 var dbConnection = require("./dbConnection");
 var runAPIS = require('./API/index')
+const jwt = require('jsonwebtoken')
 //// MiddleWare
 app.use(express.json());
 app.use(
@@ -31,13 +32,20 @@ function Authenticate(req, resp, next) {
   if (req.url === "/signup" || req.url === "/signin") {
     next();
   } else {
-    if (req.session.user && req.cookies["connect.sid"]) {
-      next();
-    } else {
-      resp.json({ message: "authentication failed" });
-    }
+    const token = req.header ('x-auth-token');
+    if (!token) return resp.status(401).send('Access Denied');
+      try{
+        const verified = jwt.verify(token,process.env.ACCESS_TOKEN_SECRET)
+        req.user = verified;
+        next();
+      }catch(err){
+        resp.status(400).send('Invalid Token');
+      }
+   }
+  
+
   }
-}
+
 
 dbConnection();
 app.use(Authenticate);
