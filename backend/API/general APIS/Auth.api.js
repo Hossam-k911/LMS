@@ -4,6 +4,7 @@ require('dotenv').config();
 module.exports = function(app){
  
     app.post("/signin", async (req, resp) => {
+       try{
         const { email, password} = req.body;
         let user = await PatientsModel.findOne({ email, password });
         if (user) {
@@ -13,6 +14,9 @@ module.exports = function(app){
         } else {
           resp.json({ message: "error" });
         }
+       }catch(err){
+        resp.json({ message: "error" });
+       }
       });
 
 
