@@ -15,7 +15,7 @@ module.exports = function(app){
           resp.json({ message: "error" });
         }
        }catch(error){
-        resp.status(error.response.status)
+        // resp.status(error.response.status)
         return resp.send(error.message);
        }
       });
