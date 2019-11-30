@@ -5,7 +5,7 @@ var session = require("express-session");
 var uuid = require("uuid/v4");
 var cors = require("cors");
 var cookieParser = require("cookie-parser");
-var dbConnection = require("./dbConnection").default;
+var dbConnection = require("./dbConnection");
 var runAPIS = require("./API/index");
 const jwt = require("jsonwebtoken");
 //// MiddleWare
