@@ -18,7 +18,7 @@ module.exports = function(app){
         }
        }catch(error){
           //  resp.status(error.response.status)
-          resp.status(400).send(error.details[0].message);
+          resp.status(400).send(error.message);
        }
       });
 
