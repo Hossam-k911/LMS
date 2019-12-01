@@ -11,7 +11,7 @@ module.exports = function(app) {
       if (user) {
         //create and assign token
 
-        const token = jwt.sign({email:user.email},process.env.TOKEN_SECRET)
+        const token = jwt.sign({_id:user._id},process.env.TOKEN_SECRET)
         resp.header('x-auth-token',token).send({"x-auth-token":token});
        
       } else {
