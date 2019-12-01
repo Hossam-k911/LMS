@@ -1,10 +1,11 @@
 // Declarations and Imports
 var express = require("express");
-const redis = require('redis')
+//  const redis = require('redis')
 var app = express();
 var session = require("express-session");
-let RedisStore = require('connect-redis')(session)
-let client = redis.createClient()
+//  let RedisStore = require('connect-redis')(session)
+//  let client = redis.createClient()
+// const MongoStore = require('connect-mongo')(session);
 var uuid = require("uuid/v4");
 var cors = require("cors");
 var cookieParser = require("cookie-parser");
@@ -15,10 +16,12 @@ const jwt = require("jsonwebtoken");
 app.use(express.json());
 app.use(
   session({
-    store: new RedisStore({ client }),
+    //  store: new RedisStore({ client }),
+    // store: new MongoStore(options),
     genid: uuid,
     secret: "LMS Project",
     resave: false,
+    saveUninitialized: true
   })
 );
 
