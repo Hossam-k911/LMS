@@ -16,9 +16,12 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "config": "^3.2.4",
+    "connect-redis": "^4.0.3",
     "dotenv": "^8.2.0",
     "dotenv-extended": "^2.4.0",
+    "express-session": "^1.17.0",
     "jsonwebtoken": "^8.5.1",
-    "mongodb": "^3.3.4"
+    "mongodb": "^3.3.4",
+    "redis": "^2.8.0"
   }
 }
