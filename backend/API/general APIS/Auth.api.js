@@ -39,7 +39,7 @@ module.exports = function(app) {
   });
 
   /// signout
-  app.get("/signout", async (req, resp) => {
+  app.get("/signout", async (req, resp) => {  
     await req.session.destroy();
     resp.json({ message: "success" });
   });

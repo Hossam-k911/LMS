@@ -54,7 +54,7 @@ function Authenticate(req, resp, next) {
 }
 
 dbConnection();
-// app.use(Authenticate);
+ app.use(Authenticate);
 runAPIS(app);
 
 app.get("/", (req, resp) => {
