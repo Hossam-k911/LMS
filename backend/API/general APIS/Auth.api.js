@@ -1,5 +1,6 @@
 var PatientsModel = require("../../Models/MedicalModels/patient.model");
-var jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
+const config = require('config');
 require("dotenv").config();
 module.exports = function(app) {
   app.post("/signin", (req, resp) => {
@@ -7,10 +8,25 @@ module.exports = function(app) {
       const { email, password } = req.body;
       let user = PatientsModel.findOne({ email, password });
       if (user) {
-        //create and assign token
-
-         const token = jwt.sign({_id:user._id},process.env.ACCESS_TOKEN_SECRET)
+//         //create and assign token
+// const accessToken = generateAccessToken(user)
+// const refreshedToken = jwt.sign(user,process.env.REFRESH_TOKEN_SECRET)
+// resp.json({accessToken:accessToken,refreshedToken:refreshedToken})
+        //  const token = jwt.sign({_id:user._id},process.env.ACCESS_TOKEN_SECRET)
         // const token = user.generateAuthToken();
+        function generateAccessToken(){
+       const token = jwt.sign({
+         _id:this._id,
+         email:this.email
+       },process.env.jwtPrivateKey
+       );
+       return token;
+        }
+
+
+
+        const token = generateAccessToken();
+
         resp.header('x-auth-token',token).send({"x-auth-token":token});
        
       } else {
