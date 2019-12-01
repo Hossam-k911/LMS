@@ -29,7 +29,7 @@ module.exports = function(app) {
       });
       await patient.save();
       patient.confirm == false;
-      resp.json({ message: "Success", patient: patient });
+      resp.json( patient );
     } catch (err) {
       resp.json({ message: "error adding Patient" });
     }
