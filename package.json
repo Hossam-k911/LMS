@@ -21,6 +21,7 @@
     "dotenv": "^8.2.0",
     "dotenv-extended": "^2.4.0",
     "express-session": "^1.17.0",
+    "fs": "0.0.1-security",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.3.4",
     "redis": "^2.8.0"

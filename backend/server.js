@@ -12,6 +12,7 @@ var cookieParser = require("cookie-parser");
 var dbConnection = require("./dbConnection");
 var runAPIS = require("./API/index");
 const jwt = require("jsonwebtoken");
+const config = require("config");
 //// MiddleWare
 app.use(express.json());
 app.use(
@@ -41,7 +42,7 @@ function Authenticate(req, resp, next) {
     const token = req.header("x-auth-token");
     if (!token) return resp.status(401).send("Access Denied");
     try {
-      const verified = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+      const verified = jwt.verify(token,process.env.TOKEN_SECRET);
       req.user = verified;
       next();
     } catch (err) {
@@ -51,7 +52,7 @@ function Authenticate(req, resp, next) {
 }
 
 dbConnection();
-// app.use(Authenticate);
+ app.use(Authenticate);
 runAPIS(app);
 
 app.get("/", (req, resp) => {
