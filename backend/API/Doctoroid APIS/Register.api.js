@@ -1,9 +1,10 @@
 var mongoose = require("mongoose");
 var patientModel = require("../../Models/MedicalModels/patient.model");
 var MedecinesModel = require("../../Models/MedicalModels/medicines.model");
-
+const bcrypt = require('bcryptjs')
 module.exports = function(app) {
   app.post("/signup", async (req, resp) => {
+    
     try {
       const {
         mob_id,
