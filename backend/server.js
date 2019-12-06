@@ -11,7 +11,7 @@ var cookieParser = require("cookie-parser");
 var dbConnection = require("./dbConnection");
 var runAPIS = require("./API/index");
 const jwt = require("jsonwebtoken");
-const config = require('config')
+
 //// MiddleWare
 app.use(express.json());
 app.use(

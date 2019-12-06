@@ -1,5 +1,5 @@
 var mongoose = require("mongoose");
-var patientModel = require("../../Models/MedicalModels/patient.model");
+// var patientModel = require("../../Models/MedicalModels/patient.model");
 var medicinesModel = require("../../Models/MedicalModels/medicines.model");
 
 module.exports = function createPatientsAPIS(app) {
@@ -31,6 +31,21 @@ module.exports = function createPatientsAPIS(app) {
       resp.status(200).json(medicines);
     } catch (err) {
       resp.status(400).json("error fetching medicines");
+    }
+  });
+  app.post("/addmedecinetopatient", async (req, resp) => {
+    try {
+      const { p_id, m_id } = req.body;
+      let selectedMedecine = await MedecinesModel.findOne({ _id: m_id });
+      let result = await patientModel.findOneAndUpdate(
+        { _id: p_id },
+        { medicines: selectedMedecine }
+      );
+      await result.save();
+      resp.status(200).json( result );
+    } catch (err) {
+      resp.status(400).send("error in Updating Medicines");
+
     }
   });
 };

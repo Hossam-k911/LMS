@@ -53,19 +53,5 @@ module.exports = function(app) {
 
     }
   });
-  app.post("/addmedecinetopatient", async (req, resp) => {
-    try {
-      const { p_id, m_id } = req.body;
-      let selectedMedecine = await MedecinesModel.findOne({ _id: m_id });
-      let result = await patientModel.findOneAndUpdate(
-        { _id: p_id },
-        { medicines: selectedMedecine }
-      );
-      await result.save();
-      resp.status(200).json( result );
-    } catch (err) {
-      resp.status(400).send("error in Updating Medicines");
-
-    }
-  });
+ 
 };
