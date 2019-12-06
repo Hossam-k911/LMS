@@ -20,20 +20,17 @@ module.exports = function createPatientsAPIS(app) {
       });
       await medicine.save();
 
-      resp.json({ message: " medicine added", result: medicine });
+      resp.status(200).json(medicine);
     } catch (err) {
-      resp.json({ message: "error adding medecine" });
+      resp.status(400).json("error adding medecine");
     }
   });
-  app.get('/getmedicines',async(req,resp)=>{
-    try{
-      
-   let medicines= await medicinesModel.find({})
-   resp.json({message:"success",result:medicines})
+  app.get("/getmedicines", async (req, resp) => {
+    try {
+      let medicines = await medicinesModel.find({});
+      resp.status(200).json(medicines);
+    } catch (err) {
+      resp.status(400).json("error fetching medicines");
     }
-    catch(err){
-   resp.json({message:"error fetching medecines"})
-
-    }
-  })
+  });
 };
