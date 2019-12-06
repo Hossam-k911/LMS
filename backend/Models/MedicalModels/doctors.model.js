@@ -7,7 +7,6 @@ var DoctorsModel = new mongoose.model('Patients',{
     doctor_email:{type:String,require:true},
     doctor_password:{type:String,require:true},
     medicines: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Medicines' }],
-    // doctors: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Doctors' }]
 
 })
 module.exports = DoctorsModel

@@ -1,13 +1,10 @@
 // Declarations and Imports
 var express = require("express");
-//  const redis = require('redis')
+
 var app = express();
 require("dotenv").config();
 
 var session = require("express-session");
-//  let RedisStore = require('connect-redis')(session)
-//  let client = redis.createClient()
-// const MongoStore = require('connect-mongo')(session);
 var uuid = require("uuid/v4");
 var cors = require("cors");
 var cookieParser = require("cookie-parser");
@@ -19,8 +16,6 @@ const config = require('config')
 app.use(express.json());
 app.use(
   session({
-    //  store: new RedisStore({ client }),
-    // store: new MongoStore(options),
     genid: uuid,
     secret: "LMS Project",
     resave: false,
@@ -54,7 +49,7 @@ function Authenticate(req, resp, next) {
 }
 
 dbConnection();
- app.use(Authenticate);
+//  app.use(Authenticate);
 runAPIS(app);
 
 app.get("/", (req, resp) => {

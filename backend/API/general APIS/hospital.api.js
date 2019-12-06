@@ -31,15 +31,14 @@ module.exports = function(app) {
         hospital_PurchasingManager
       });
       await hospital.save();
-      resp.json({message:"success",hospital})
+      resp.status(200).json(hospital);
     } catch (err) {
-      resp.json({message:"error "})
-      
+      resp.status(400).json("error ");
     }
   });
 
-  app.get('/hospitalinfo',async(req,resp)=>{
+  app.get("/hospitalinfo", async (req, resp) => {
     let hospital = await HospitalModel.find({});
     resp.json(hospital);
-  })
+  });
 };

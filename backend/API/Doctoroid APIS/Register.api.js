@@ -1,13 +1,11 @@
 var mongoose = require("mongoose");
 var patientModel = require("../../Models/MedicalModels/patient.model");
 var MedecinesModel = require("../../Models/MedicalModels/medicines.model");
-const bcrypt = require('bcryptjs')
+// const bcrypt = require("bcryptjs");
 module.exports = function(app) {
   app.post("/signup", async (req, resp) => {
-    
     try {
       const {
-        mob_id,
         firstName,
         lastName,
         email,
@@ -19,7 +17,6 @@ module.exports = function(app) {
 
       var patient = new patientModel({
         _id: mongoose.Types.ObjectId(),
-        mob_id,
         firstName,
         lastName,
         email,
@@ -30,51 +27,45 @@ module.exports = function(app) {
       });
       await patient.save();
       patient.confirm == false;
-      resp.json( patient );
+      resp.status(200).send(patient);
     } catch (err) {
-      resp.json({ message: "error adding Patient" });
+      resp.status(400).send("error in adding Patient");
     }
   });
   app.post("/confirmsignup", async (req, resp) => {
     try {
-      const {
-        p_id,
-        location,
-        date,
-        /*medicines:medicine_id,*/ confirm
-      } = req.body;
+      const { p_id, location, date, confirm } = req.body;
       let selectedPatient = await patientModel.findOneAndUpdate(
         { _id: p_id },
-        { location, date, confirm /*medicine_id*/ }
+        { location, date, confirm }
       );
-      if(selectedPatient.confirm == "false"){
-
+      if (selectedPatient.confirm == "false") {
         selectedPatient.confirm = "true";
 
         await selectedPatient.save();
-        
-        resp.json({ message: "success", selectedPatient });
-      }else{
-        resp.json({ message: "error in confirm" });
 
+        resp.status(200).send(selectedPatient);
+      } else {
+        resp.status(400).send("error in confirming signup");
       }
-      
-     
     } catch (err) {
-      resp.json({ message: "error" });
+      resp.status(400).send("error in confirming signup");
+
     }
   });
   app.post("/addmedecinetopatient", async (req, resp) => {
-    try{
-      const{p_id,m_id} = req.body
-     let selectedMedecine = await MedecinesModel.findOne({_id:m_id})
-      let result = await patientModel.findOneAndUpdate({_id:p_id},{medicines:selectedMedecine}) 
-      await result.save()     
-      resp.json({message:"success",result})
-    }catch(err){
-      resp.json({message:"error updating medicines"})
+    try {
+      const { p_id, m_id } = req.body;
+      let selectedMedecine = await MedecinesModel.findOne({ _id: m_id });
+      let result = await patientModel.findOneAndUpdate(
+        { _id: p_id },
+        { medicines: selectedMedecine }
+      );
+      await result.save();
+      resp.status(200).json( result );
+    } catch (err) {
+      resp.status(400).send("error in Updating Medicines");
 
     }
   });
-  
 };

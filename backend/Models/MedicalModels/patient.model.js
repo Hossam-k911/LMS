@@ -2,7 +2,7 @@ var mongoose = require('mongoose')
 
 var PatientsModel = new mongoose.model('Patients',{
     _id:mongoose.Schema.Types.ObjectId,
-    user_id:String,
+    // user_id:String,
     firstName:{type:String},
     lastName:{type:String},
     email:{type:String ,require:true},
@@ -13,7 +13,5 @@ var PatientsModel = new mongoose.model('Patients',{
     date:{type:String},
     confirm:{type:String},
     medicines: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Medicines'}],
-    // doctors: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Doctors' }]
-
 })
 module.exports = PatientsModel

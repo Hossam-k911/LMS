@@ -6,9 +6,9 @@ module.exports = function createPatientsAPIS(app) {
   app.get("/getpatients", async (req, resp) => {
     try {
       let patients = await patientModel.find({});
-      resp.json({ message: "success", result: patients });
+      resp.status(200).send(patients);
     } catch (err) {
-      resp.json({ message: "error fetching patients" });
+      resp.status(400).send("error in getting patients");
     }
   });
 
@@ -16,24 +16,24 @@ module.exports = function createPatientsAPIS(app) {
     try {
       const { p_id } = req.body;
       let result = await patientModel.remove({ _id: p_id });
-      resp.json({ message: "success", p_id });
+      resp.status(200).json(result);
     } catch (err) {
-      resp.json({ message: "error deleting patient" });
+      resp.status(400).send("error in removing Patient");
     }
   });
 
-  app.get("/removeallpatients", async (req, resp) => {
-    let output = await patientModel.remove({});
-    resp.json({ message: "success", result: output });
-  });
+  // app.get("/removeallpatients", async (req, resp) => {
+  //   let output = await patientModel.remove({});
+  //   resp.json({ message: "success", result: output });
+  // });
 
   app.post("/getpatientbyid", async (req, resp) => {
     try {
       const { p_id } = req.body;
       let output = await patientModel.findOne({ _id: p_id });
-      resp.json({ message: "suceess", result: output });
+      resp.status(200).json(output);
     } catch (err) {
-      resp.json({ message: " recheck patient ID" });
+      resp.status(400).send("Invalid Patient ID");
     }
   });
 
@@ -41,7 +41,6 @@ module.exports = function createPatientsAPIS(app) {
     try {
       const {
         p_id,
-        mob_id,
         firstName,
         lastName,
         email,
@@ -50,13 +49,12 @@ module.exports = function createPatientsAPIS(app) {
         gender,
         location,
         date,
-        medicines:m_id
+        medicines: m_id
       } = req.body;
 
       let output = await patientModel.findOneAndUpdate(
         { _id: p_id },
         {
-          mob_id,
           firstName,
           lastName,
           email,
@@ -65,13 +63,13 @@ module.exports = function createPatientsAPIS(app) {
           gender,
           location,
           date,
-        m_id
+          m_id
         }
       );
       await output.save();
-      resp.json({ message: "success", result: output });
+      resp.status(200).json(output);
     } catch (err) {
-      resp.json({ message: "error in editing patient" });
+      resp.status(400).json("error in editing patient");
     }
   });
 };
