@@ -6,17 +6,17 @@ module.exports = function createPatientsAPIS(app) {
   app.post("/addmedicine", async (req, resp) => {
     try {
       const {
-        medicineName,
-        medicinePrice,
-        medicineDescription,
-        medicineQuantity
+        medicine_Name,
+        medicine_Price,
+        medicine_Description,
+        medicine_Quantity
       } = req.body;
       let medicine = new medicinesModel({
         _id: mongoose.Types.ObjectId(),
-        medicineName,
-        medicinePrice,
-        medicineDescription,
-        medicineQuantity
+        medicine_Name,
+        medicine_Price,
+        medicine_Description,
+        medicine_Quantity
       });
       await medicine.save();
 
