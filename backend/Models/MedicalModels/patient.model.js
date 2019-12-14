@@ -11,6 +11,7 @@ var PatientsModel = new mongoose.model("Patients", {
   location: { type: String },
   date: { type: String },
   confirm: { type: String, default: false },
+  snn: String,
   medicines: [{ type: mongoose.Schema.Types.ObjectId, ref: "Medicines" }]
 });
 module.exports = PatientsModel;
