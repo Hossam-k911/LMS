@@ -45,7 +45,6 @@ module.exports = function createPatientsAPIS(app) {
       resp.status(200).json( result );
     } catch (err) {
       resp.status(400).send("error in Updating Medicines");
-
     }
   });
 };

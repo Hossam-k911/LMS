@@ -1,9 +1,7 @@
 // Declarations and Imports
 var express = require("express");
-
 var app = express();
 require("dotenv").config();
-
 var session = require("express-session");
 var uuid = require("uuid/v4");
 var cors = require("cors");

@@ -24,8 +24,8 @@ module.exports = function(app) {
       //         //create and assign token
 
       const token = generateAccessToken();
-
-      resp.header("x-auth-token", token).send({ token });
+      let confirm = user.confirm;
+      resp.header("x-auth-token", token).send({"token":token,"confirm":confirm});
     } else {
       resp.status(400).send(error.message);
     }
@@ -33,7 +33,6 @@ module.exports = function(app) {
 
   /// signout
   app.get("/signout", async (req, resp) => {
-    await req.session.destroy();
     resp.status(200).send("success");
   });
 };

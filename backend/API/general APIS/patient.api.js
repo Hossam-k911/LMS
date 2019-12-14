@@ -27,13 +27,13 @@ module.exports = function createPatientsAPIS(app) {
   //   resp.json({ message: "success", result: output });
   // });
 
-  app.post("/getpatientbyid", async (req, resp) => {
+  app.get("/me", async (req, resp) => {
     try {
-      const { p_id } = req.body;
-      let output = await patientModel.findOne({ _id: p_id });
-      resp.status(200).json(output);
+     let user = req.user ;
+      
+      resp.status(200).json(user);
     } catch (err) {
-      resp.status(400).send("Invalid Patient ID");
+      resp.status(400).send("error");
     }
   });
 
