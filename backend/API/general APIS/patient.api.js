@@ -27,15 +27,7 @@ module.exports = function createPatientsAPIS(app) {
   //   resp.json({ message: "success", result: output });
   // });
 
-  app.get("/me", async (req, resp) => {
-    try {
-     let user = req.user ;
-      
-      resp.status(200).json(user);
-    } catch (err) {
-      resp.status(400).send("error");
-    }
-  });
+ 
 
   app.post("/updatepatient", async (req, resp) => {
     try {

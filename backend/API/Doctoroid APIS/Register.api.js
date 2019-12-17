@@ -34,14 +34,14 @@ module.exports = function(app) {
   });
   app.post("/confirmsignup", async (req, resp) => {
     try {
-      const { p_id, location, date, confirm,snn } = req.body;
+      const { p_id, location, date, confirm,snn,medicines } = req.body;
       let selectedPatient = await patientModel.findOneAndUpdate(
         { _id: p_id },
-        { location, date, confirm ,snn}
+        { location, date, confirm ,snn,medicines}
       );
       if (selectedPatient.confirm == "false") {
         selectedPatient.confirm = "true";
-
+      
         await selectedPatient.save();
 
         resp.status(200).send(selectedPatient);

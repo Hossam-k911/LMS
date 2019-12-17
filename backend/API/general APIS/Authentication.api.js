@@ -25,7 +25,8 @@ module.exports = function(app) {
 
       const token = generateAccessToken();
       let confirm = user.confirm;
-      resp.header("x-auth-token", token).send({"token":token,"confirm":confirm});
+      let userId = user._id
+      resp.header("x-auth-token", token).send({"token":token,"confirm":confirm,"p_id":userId});
     } else {
       resp.status(400).send(error.message);
     }
