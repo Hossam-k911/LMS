@@ -4,6 +4,7 @@
     require('./Doctoroid APIS/Register.api')(app)
     require('./general APIS/Authentication.api')(app)
     require('./general APIS/hospital.api')(app)
+    require('./Doctoroid APIS/Categories.api')(app)
     
 
 }
