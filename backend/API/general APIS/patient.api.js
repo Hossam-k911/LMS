@@ -16,7 +16,7 @@ module.exports = function createPatientsAPIS(app) {
     try {
       const { p_id } = req.body;
       let patients = await patientModel.find({ _id: p_id });
-      resp.status(200).send(patients);
+      resp.status(200).send(patients[0]);
     } catch (err) {
       resp.status(400).send("check patient ID");
     }
