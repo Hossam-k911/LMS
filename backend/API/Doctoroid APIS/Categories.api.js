@@ -24,19 +24,21 @@ module.exports = function(app) {
     try {
       const {
         cat_id,
-        /*test_id,*/ test_title,
+        test_title,
         test_period,
         test_price,
-        test_description
+        test_description,
+        test_questions
       } = req.body;
       let Selectedcategory = await CategoriesModel.findOne({ _id: cat_id });
       if (Selectedcategory) {
-        // let test = await category.category_medical_tests.findIndex(p=>p.test_id==test_id);
+        
         Selectedcategory.category_medical_tests.push({
           test_title,
           test_period,
           test_price,
-          test_description
+          test_description,
+          test_questions
         });
       }
       await Selectedcategory.save();

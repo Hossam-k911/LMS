@@ -10,6 +10,7 @@ let CategoriesModel = new mongoose.model("Categories", {
         test_title:String,
         test_period:Number,
         test_price:Number,
+        test_questions:[{type:String}],
         test_description:String
       }
     ]
