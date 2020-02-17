@@ -1,9 +1,10 @@
 var mongoose = require("mongoose");
 var CategoriesModel = require("../../Models/MedicalModels/Categories.model");
-module.exports = function(app) {
+module.exports = function categoriesAPI(app) {
   app.post("/addcategory", async (req, resp) => {
     try {
       const { category_title, category_imgLink } = req.body;
+
       let Category = new CategoriesModel({
         _id: mongoose.Types.ObjectId(),
         category_title,
@@ -32,8 +33,8 @@ module.exports = function(app) {
       } = req.body;
       let Selectedcategory = await CategoriesModel.findOne({ _id: cat_id });
       if (Selectedcategory) {
-        
         Selectedcategory.category_medical_tests.push({
+          _id:mongoose.Types.ObjectId(),
           test_title,
           test_period,
           test_price,

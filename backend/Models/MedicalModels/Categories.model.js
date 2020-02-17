@@ -6,7 +6,7 @@ let CategoriesModel = new mongoose.model("Categories", {
     category_imgLink: String,
     category_medical_tests:[
       {
-        // test_id:Number,
+        _id:mongoose.Schema.Types.ObjectId,
         test_title:String,
         test_period:Number,
         test_price:Number,
