@@ -13,6 +13,6 @@ var PatientsModel = new mongoose.model("Patients", {
   confirm: { type: String, default: false },
   snn: String,
   medicines: [{ type: mongoose.Schema.Types.ObjectId, ref: "Medicines" }],
-  requests:[{type:String}]
+  requests:[{type:mongoose.Schema.Types.ObjectId,ref: "Requests"}]
 });
 module.exports = PatientsModel;
