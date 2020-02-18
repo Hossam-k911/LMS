@@ -26,10 +26,23 @@ module.exports = function(app) {
       resp.status(400).json("check test ID");
 
       }
-      let selectedPatient = await PatientsModel.findOne({_id:p_id})
-      selectedPatient.requests.push(Request.id);
+
       await Request.save();
+      
+      let SelectedPatient = await PatientsModel.findOne({ _id: p_id });
+     SelectedPatient.requests.push(Request.id)
+    await SelectedPatient .save();
+
+
+    //    let selectedPatient = await PatientsModel.findOne({_id:p_id})
+    //   // let selectedPatient = await PatientsModel.findOneAndUpdate({_id:p_id},{requests:Request.id})
+    //   let output =  selectedPatient.requests.push(Request.id);
+    // //   await  output.save();
+    // await output.save()
+
+
       resp.status(200).json(Request);
+      
     } catch (err) {
       resp.status(400).json(" error requesting ");
     }
@@ -39,4 +52,17 @@ module.exports = function(app) {
     let Req = await RequestsModel.find({});
     resp.json(Req);
   });
+  
+app.post("/addreqtopatient", async (req, resp) => {
+  try {
+    const { p_id, req_id } = req.body;
+    let SelectedPatient = await PatientsModel.findOne({ _id: p_id });
+     SelectedPatient.requests.push(req_id)
+    await SelectedPatient .save();
+    resp.status(200).json(  SelectedPatient);
+  } catch (err) {
+    resp.status(400).send("error in Updating el 5ra");
+  }
+});
 };
+
