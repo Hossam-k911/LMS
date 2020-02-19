@@ -52,17 +52,6 @@ module.exports = function(app) {
     let Req = await RequestsModel.find({});
     resp.json(Req);
   });
-  
-app.post("/addreqtopatient", async (req, resp) => {
-  try {
-    const { p_id, req_id } = req.body;
-    let SelectedPatient = await PatientsModel.findOne({ _id: p_id });
-     SelectedPatient.requests.push(req_id)
-    await SelectedPatient .save();
-    resp.status(200).json(  SelectedPatient);
-  } catch (err) {
-    resp.status(400).send("error in Updating el 5ra");
-  }
-});
+
 };
 

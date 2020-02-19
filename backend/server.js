@@ -31,7 +31,7 @@ app.use(
 //// Authentication
 
 function Authenticate(req, resp, next) {
-  if (req.url === "/signup" || req.url === "/signin" || req.url === "/"||req.url==="/dashboard/signup"||req.url==="/dashboard/signin") {
+  if (req.url === "/signup" || req.url === "/signin" || req.url === "/"||req.url==="/dashboard/signin") {
     next();
   } else {
     const token = req.header("x-auth-token");
