@@ -41,7 +41,7 @@ module.exports = function(app) {
 
       const token = generateAccessToken();
      
-      resp.header("x-auth-token", token).send({"x-auth-token":token})
+      resp.header("token", token).send({"token":token})
       // resp.status(200).json(user);
     } else {
     //   resp.status(400).send(error.message);
