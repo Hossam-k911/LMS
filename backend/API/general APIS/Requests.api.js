@@ -10,6 +10,7 @@ module.exports = function(app) {
         t_id,
         req_status,
         req_time,
+        req_date,
         req_answers,
         req_test,
         p_id
@@ -18,15 +19,12 @@ module.exports = function(app) {
         _id: mongoose.Types.ObjectId(),
         req_status,
         req_time,
+        req_date,
         req_answers,
         req_test
       });
       let Selectedcategory = await CategoriesModel.findOne({ _id: c_id });
-      // let SelectedTest = await Selectedcategory.category_medical_tests[0].findOne({
-      //   _id: t_id
-      // });
 
-      // let SelectedTest = Selectedcategory.category_medical_tests[0].id;
       let SelectedTest = Selectedcategory.category_medical_tests[0];
 
       if (SelectedTest.id == t_id) {
@@ -41,12 +39,6 @@ module.exports = function(app) {
       SelectedPatient.requests.push(Request.id);
       await SelectedPatient.save();
 
-      //    let selectedPatient = await PatientsModel.findOne({_id:p_id})
-      //   // let selectedPatient = await PatientsModel.findOneAndUpdate({_id:p_id},{requests:Request.id})
-      //   let output =  selectedPatient.requests.push(Request.id);
-      // //   await  output.save();
-      // await output.save()
-
       resp.status(200).json(Request);
     } catch (err) {
       resp.status(400).json(" error requesting ");
@@ -59,16 +51,13 @@ module.exports = function(app) {
   });
 
   app.post("/patientreq", async (req, resp) => {
-   try{
-    const {p_id} = req.body;
-    let SelectedPatient = await PatientsModel.findOne({_id:p_id})
-    let requests = SelectedPatient.requests;
-    resp.status(200).json({requests});
-    
-
-   }catch(err){
-    resp.status(400).json(" error getting requests for this Patient ");
-
-   }
+    try {
+      const { p_id } = req.body;
+      let SelectedPatient = await PatientsModel.findOne({ _id: p_id });
+      let requests = SelectedPatient.requests;
+      resp.status(200).json({ requests });
+    } catch (err) {
+      resp.status(400).json(" error getting requests for this Patient ");
+    }
   });
 };
