@@ -14,7 +14,8 @@ module.exports = function(app) {
         req_answers,
         req_test,
         req_p_id,
-        req_p_name
+        req_p_name,
+        req_p_phone
       } = req.body;
       let Request = new RequestsModel({
         _id: mongoose.Types.ObjectId(),
@@ -24,7 +25,8 @@ module.exports = function(app) {
         req_answers,
         req_test,
         req_p_id,
-        req_p_name
+        req_p_name,
+        req_p_phone
       });
       let Selectedcategory = await CategoriesModel.findOne({ _id: c_id });
 
@@ -42,6 +44,7 @@ module.exports = function(app) {
       if (SelectedPatient) {
         Request.req_p_name =
           SelectedPatient.firstName + " " + SelectedPatient.lastName;
+        Request.req_p_phone = SelectedPatient.phone;
         await Request.save();
         SelectedPatient.requests.push(Request.id);
         await SelectedPatient.save();
