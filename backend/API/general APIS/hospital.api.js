@@ -39,6 +39,6 @@ module.exports = function(app) {
 
   app.get("/hospitalinfo", async (req, resp) => {
     let hospital = await HospitalModel.find({});
-    resp.json(hospital[0]);
+    resp.json(hospital);
   });
 };
