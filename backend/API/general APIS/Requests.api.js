@@ -61,4 +61,34 @@ module.exports = function(app) {
       resp.status(400).json(" error getting requests for this Patient ");
     }
   });
+  app.put("/editreq", async (req, resp) => {
+    try {
+      const { req_id } = req.body;
+      RequestsModel.findOne({ _id: req_id }, function(err, foundObject) {
+        if (err) {
+          resp.status(500).json("error 1");
+        } else {
+          if (req.body.req_status) {
+            foundObject.req_status = req.body.req_status;
+          }
+          if (req.body.req_time) {
+            foundObject.req_time = req.body.req_time;
+          }
+          if (req.body.req_date) {
+            foundObject.req.date = req.body.req.date;
+          }
+          if (req.body.req_answers) {
+            foundObject.req.answers = req.body.req.answers;
+          }
+          foundObject.save(function(err, updateObject) {
+            if (err) {
+              resp.status(500).send();
+            } else {
+              resp.send(updateObject);
+            }
+          });
+        }
+      });
+    } catch (err) {}
+  });
 };

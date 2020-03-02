@@ -5,7 +5,7 @@ let RequestsModel = new mongoose.model("Requests", {
   req_status: { type: String, require: true },
   req_time: { type: String, require: true },
   req_date: { type: String, require: true },
-  req_p_id: { type: String },
+  req_p_id: { type: String, require: true },
   req_answers: [{ type: String, require: true }],
   req_test: { type: String, require: true }
 });
