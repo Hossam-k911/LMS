@@ -13,7 +13,8 @@ module.exports = function(app) {
         req_date,
         req_answers,
         req_test,
-        req_p_id
+        req_p_id,
+        req_p_name
       } = req.body;
       let Request = new RequestsModel({
         _id: mongoose.Types.ObjectId(),
@@ -22,7 +23,8 @@ module.exports = function(app) {
         req_date,
         req_answers,
         req_test,
-        req_p_id
+        req_p_id,
+        req_p_name
       });
       let Selectedcategory = await CategoriesModel.findOne({ _id: c_id });
 
@@ -37,8 +39,11 @@ module.exports = function(app) {
       await Request.save();
 
       let SelectedPatient = await PatientsModel.findOne({ _id: req_p_id });
-      SelectedPatient.requests.push(Request.id);
-      await SelectedPatient.save();
+      if (SelectedPatient) {
+        Request.req_p_name = SelectedPatient.firstName;
+        SelectedPatient.requests.push(Request.id);
+        await SelectedPatient.save();
+      }
 
       resp.status(200).json(Request);
     } catch (err) {
@@ -59,6 +64,19 @@ module.exports = function(app) {
       resp.status(200).json({ requests });
     } catch (err) {
       resp.status(400).json(" error getting requests for this Patient ");
+    }
+  });
+  app.post("/reqpatientinfo", async (req, resp) => {
+    try {
+      const { req_id } = req.body;
+      let SelectedRequest = await RequestsModel.findOne({ _id: req_id });
+      if (SelectedRequest) {
+        let p_id = SelectedRequest.req_p_id;
+        let SelectedPatient = await PatientsModel.findOne({ _id: p_id });
+        resp.status(200).json(SelectedPatient);
+      }
+    } catch (err) {
+      resp.status(400).json(" error getting patient of this ");
     }
   });
   app.put("/editreq", async (req, resp) => {
