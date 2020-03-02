@@ -13,7 +13,7 @@ module.exports = function(app) {
         req_date,
         req_answers,
         req_test,
-        p_id
+        req_p_id
       } = req.body;
       let Request = new RequestsModel({
         _id: mongoose.Types.ObjectId(),
@@ -21,7 +21,8 @@ module.exports = function(app) {
         req_time,
         req_date,
         req_answers,
-        req_test
+        req_test,
+        req_p_id
       });
       let Selectedcategory = await CategoriesModel.findOne({ _id: c_id });
 
@@ -35,7 +36,7 @@ module.exports = function(app) {
 
       await Request.save();
 
-      let SelectedPatient = await PatientsModel.findOne({ _id: p_id });
+      let SelectedPatient = await PatientsModel.findOne({ _id: req_p_id });
       SelectedPatient.requests.push(Request.id);
       await SelectedPatient.save();
 

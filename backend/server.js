@@ -31,13 +31,18 @@ app.use(
 //// Authentication
 
 function Authenticate(req, resp, next) {
-  if (req.url === "/signup" || req.url === "/signin" || req.url === "/"||req.url==="/dashboard/signin") {
+  if (
+    req.url === "/signup" ||
+    req.url === "/signin" ||
+    req.url === "/" ||
+    req.url === "/dashboard/signin"
+  ) {
     next();
   } else {
     const token = req.header("x-auth-token");
     if (!token) return resp.status(401).send("Access Denied");
     try {
-      const verified = jwt.verify(token,process.env.jwtPrivateKey);
+      const verified = jwt.verify(token, process.env.jwtPrivateKey);
       req.user = verified;
       next();
     } catch (err) {
@@ -47,11 +52,11 @@ function Authenticate(req, resp, next) {
 }
 
 dbConnection();
-    app.use(Authenticate);
+app.use(Authenticate);
 runAPIS(app);
 
 app.get("/", (req, resp) => {
-  resp.send("LMS IS CREATED");
+  resp.send("LMS IS CREATED .............");
 });
 
 const port = process.env.PORT || 3000;
