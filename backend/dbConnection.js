@@ -16,9 +16,9 @@ module.exports = function dbConnection() {
     })
     .then(db => console.log(`DB is connected`))
     .catch(err => console.error(err));
-  mongoose.connect("mongodb://localhost:27017/LMS", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false
-  });
+  // mongoose.connect("mongodb://localhost:27017/LMS", {
+  //   useNewUrlParser: true,
+  //   useUnifiedTopology: true,
+  //   useFindAndModify: false
+  // });
 };

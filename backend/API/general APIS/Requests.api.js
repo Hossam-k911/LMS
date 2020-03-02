@@ -40,7 +40,9 @@ module.exports = function(app) {
 
       let SelectedPatient = await PatientsModel.findOne({ _id: req_p_id });
       if (SelectedPatient) {
-        Request.req_p_name = SelectedPatient.firstName;
+        Request.req_p_name =
+          SelectedPatient.firstName + " " + SelectedPatient.lastName;
+        await Request.save();
         SelectedPatient.requests.push(Request.id);
         await SelectedPatient.save();
       }
