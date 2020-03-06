@@ -2,6 +2,7 @@ var mongoose = require("mongoose");
 var RequestsModel = require("../../Models/MedicalModels/Requests.model");
 var CategoriesModel = require("../../Models/MedicalModels/Categories.model");
 var PatientsModel = require("../../Models/MedicalModels/patient.model");
+var _ = require("lodash");
 module.exports = function(app) {
   app.post("/addreq", async (req, resp) => {
     try {
@@ -113,5 +114,30 @@ module.exports = function(app) {
         }
       });
     } catch (err) {}
+  });
+
+  app.post("/delrequest", async (req, resp) => {
+    try {
+      const { req_id, p_id } = req.body;
+
+      await RequestsModel.remove({ _id: req_id });
+
+      let SelectedRequest = await PatientsModel.findOne({ _id: p_id });
+      let arr = [];
+      let index = 0;
+
+      for (i = 0; i < SelectedRequest.requests.length; i++) {
+        if (SelectedRequest.requests[i] != req_id) {
+          arr[index] = SelectedRequest.requests[i];
+          index++;
+        }
+      }
+      SelectedRequest.requests = arr;
+      await SelectedRequest.save();
+
+      resp.status(200).json("success");
+    } catch (err) {
+      resp.status(400).send("error .. check request ID ");
+    }
   });
 };
