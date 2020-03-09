@@ -88,7 +88,7 @@ module.exports = function(app) {
       resp.status(400).json(" error getting patient of this ");
     }
   });
-  app.put("/editreq", async (req, resp) => {
+  app.post("/editreq", async (req, resp) => {
     try {
       const { req_id } = req.body;
       RequestsModel.findOne({ _id: req_id }, function(err, foundObject) {
