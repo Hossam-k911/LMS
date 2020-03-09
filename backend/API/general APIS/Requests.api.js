@@ -2,7 +2,7 @@ var mongoose = require("mongoose");
 var RequestsModel = require("../../Models/MedicalModels/Requests.model");
 var CategoriesModel = require("../../Models/MedicalModels/Categories.model");
 var PatientsModel = require("../../Models/MedicalModels/patient.model");
-var _ = require("lodash");
+// var _ = require("lodash");
 module.exports = function(app) {
   app.post("/addreq", async (req, resp) => {
     try {
@@ -103,6 +103,9 @@ module.exports = function(app) {
           }
           if (req.body.req_date) {
             foundObject.req.date = req.body.req.date;
+          }
+          if (req.body.req_notes) {
+            foundObject.req_notes = req.body.req_notes;
           }
           if (req.body.req_answers) {
             foundObject.req.answers = req.body.req.answers;
