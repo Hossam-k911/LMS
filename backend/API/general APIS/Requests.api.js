@@ -16,7 +16,8 @@ module.exports = function(app) {
         req_test,
         req_p_id,
         req_p_name,
-        req_p_phone
+        req_p_phone,
+        req_notes
       } = req.body;
       let Request = new RequestsModel({
         _id: mongoose.Types.ObjectId(),
@@ -27,7 +28,8 @@ module.exports = function(app) {
         req_test,
         req_p_id,
         req_p_name,
-        req_p_phone
+        req_p_phone,
+        req_notes
       });
       let Selectedcategory = await CategoriesModel.findOne({ _id: c_id });
 
@@ -35,6 +37,7 @@ module.exports = function(app) {
 
       if (SelectedTest.id == t_id) {
         Request.req_test = SelectedTest.test_title;
+        Request.req_notes = "Empty";
       } else {
         resp.status(400).json("check test ID");
       }
@@ -139,5 +142,10 @@ module.exports = function(app) {
     } catch (err) {
       resp.status(400).send("error .. check request ID ");
     }
+  });
+
+  app.get("/delRequests", async (req, resp) => {
+    let output = await RequestsModel.remove({});
+    resp.json(output);
   });
 };

@@ -9,6 +9,7 @@ let RequestsModel = new mongoose.model("Requests", {
   req_p_name: { type: String, require: true },
   req_p_phone: { type: String },
   req_answers: [{ type: String, require: true }],
-  req_test: { type: String, require: true }
+  req_test: { type: String, require: true },
+  req_notes: { type: String }
 });
 module.exports = RequestsModel;
