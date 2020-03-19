@@ -23,10 +23,13 @@ app.use(
 
 app.use(cookieParser());
 app.use(
-  cors({
-    credentials: true,
-    origin: "http://localhost:4200"
-  })
+  cors(
+    // {
+    // credentials: true,
+    // origin: "http://localhost:4200/",
+    // allowedHeaders: "*"
+    // }
+  )
 );
 //// Authentication
 
