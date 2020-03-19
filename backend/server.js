@@ -20,7 +20,11 @@ app.use(
     saveUninitialized: true
   })
 );
-
+app.use(function (req, resp, next) {
+  resp.header("Access-Control-Allow-Origin", "*");
+  resp.header("Access-Control-Allow-Headers", "Origin, X-Requested-With,Content-Type,Accept");
+  next();
+})
 app.use(cookieParser());
 app.use(
   cors(
