@@ -20,23 +20,25 @@ app.use(
     saveUninitialized: true
   })
 );
-// app.use(function (req, resp, next) {
-//   resp.header("Access-Control-Allow-Origin", "*");
-//   resp.header("Access-Control-Allow-Headers", "Origin, X-Requested-With,Content-Type,Accept");
-//   resp.headers('Access-Control-Allow-Methods', 'GET,POST,OPTIONS,DELETE,PUT');
-//   next();
-// })
-
-app.use(cookieParser());
 app.use(
   cors(
     {
       credentials: true,
       origin: "http://localhost:4200",
-      allowedHeaders: true
+      "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+      // allowedHeaders: true
     }
   )
 );
+app.use(function (req, resp, next) {
+  resp.header("Access-Control-Allow-Origin", "*");
+  resp.header("Access-Control-Allow-Headers", "Origin, X-Requested-With,Content-Type,Accept");
+  resp.headers('Access-Control-Allow-Methods', 'GET,POST,OPTIONS,DELETE,PUT');
+  next();
+})
+
+app.use(cookieParser());
+
 //// Authentication
 
 function Authenticate(req, resp, next) {
