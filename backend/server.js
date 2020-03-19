@@ -28,11 +28,11 @@ app.use(function (req, resp, next) {
 app.use(cookieParser());
 app.use(
   cors(
-    // {
-    // credentials: true,
-    // origin: "http://localhost:4200/",
-    // allowedHeaders: "*"
-    // }
+    {
+      credentials: true,
+      origin: "http://localhost:4200/",
+      allowedHeaders: true
+    }
   )
 );
 //// Authentication
