@@ -25,7 +25,7 @@ app.use(
     {
       credentials: true,
       origin: "http://localhost:4200",
-      // "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+
       // allowedHeaders: true
     }
   )

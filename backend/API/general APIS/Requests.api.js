@@ -3,7 +3,7 @@ var RequestsModel = require("../../Models/MedicalModels/Requests.model");
 var CategoriesModel = require("../../Models/MedicalModels/Categories.model");
 var PatientsModel = require("../../Models/MedicalModels/patient.model");
 // var _ = require("lodash");
-module.exports = function(app) {
+module.exports = function (app) {
   app.post("/addreq", async (req, resp) => {
     try {
       const {
@@ -51,6 +51,7 @@ module.exports = function(app) {
         Request.req_p_phone = SelectedPatient.phone;
         await Request.save();
         SelectedPatient.requests.push(Request.id);
+        SelectedPatient.requests_name.push(Request.req_test);
         await SelectedPatient.save();
       }
 
@@ -91,7 +92,7 @@ module.exports = function(app) {
   app.put("/editreq", async (req, resp) => {
     try {
       const { req_id } = req.body;
-      RequestsModel.findOne({ _id: req_id }, function(err, foundObject) {
+      RequestsModel.findOne({ _id: req_id }, function (err, foundObject) {
         if (err) {
           resp.status(500).json("error 1");
         } else {
@@ -110,7 +111,7 @@ module.exports = function(app) {
           if (req.body.req_answers) {
             foundObject.req.answers = req.body.req.answers;
           }
-          foundObject.save(function(err, updateObject) {
+          foundObject.save(function (err, updateObject) {
             if (err) {
               resp.status(500).send();
             } else {
@@ -119,7 +120,7 @@ module.exports = function(app) {
           });
         }
       });
-    } catch (err) {}
+    } catch (err) { }
   });
 
   app.post("/delrequest", async (req, resp) => {
