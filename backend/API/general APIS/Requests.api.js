@@ -17,7 +17,8 @@ module.exports = function (app) {
         req_p_id,
         req_p_name,
         req_p_phone,
-        req_notes
+        req_notes,
+        req_category
       } = req.body;
       let Request = new RequestsModel({
         _id: mongoose.Types.ObjectId(),
@@ -29,15 +30,17 @@ module.exports = function (app) {
         req_p_id,
         req_p_name,
         req_p_phone,
-        req_notes
+        req_notes,
+        req_category
       });
       let Selectedcategory = await CategoriesModel.findOne({ _id: c_id });
-
+      var cat = Selectedcategory.category_title;
       let SelectedTest = Selectedcategory.category_medical_tests[0];
 
       if (SelectedTest.id == t_id) {
         Request.req_test = SelectedTest.test_title;
         Request.req_notes = "Empty";
+        Request.req_category = cat
       } else {
         resp.status(400).json("check test ID");
       }
