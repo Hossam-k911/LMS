@@ -18,7 +18,11 @@ module.exports = function (app) {
         req_p_name,
         req_p_phone,
         req_notes,
-        req_category
+        req_category,
+        req_testPeriod,
+        req_testPrice,
+        req_testDesc,
+
       } = req.body;
       let Request = new RequestsModel({
         _id: mongoose.Types.ObjectId(),
@@ -31,16 +35,26 @@ module.exports = function (app) {
         req_p_name,
         req_p_phone,
         req_notes,
-        req_category
+        req_category,
+        req_testPeriod,
+        req_testPrice,
+        req_testDesc,
       });
       let Selectedcategory = await CategoriesModel.findOne({ _id: c_id });
       var cat = Selectedcategory.category_title;
       let SelectedTest = Selectedcategory.category_medical_tests[0];
+      var testPeriod = SelectedTest.test_period;
+      var testPrice = SelectedTest.test_price;
+      var testDesc = SelectedTest.test_description;
 
       if (SelectedTest.id == t_id) {
         Request.req_test = SelectedTest.test_title;
         Request.req_notes = "Empty";
         Request.req_category = cat
+        Request.req_testPeriod = testPeriod
+        Request.req_testPrice = testPrice
+        Request.req_testDesc = testDesc;
+
       } else {
         resp.status(400).json("check test ID");
       }

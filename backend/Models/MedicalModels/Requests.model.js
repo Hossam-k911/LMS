@@ -11,7 +11,11 @@ let RequestsModel = new mongoose.model("Requests", {
   req_answers: [{ type: String, require: true }],
   req_test: { type: String, require: true },
   req_notes: { type: String },
-  req_category: { type: String }
+  req_category: { type: String },
+  req_testPeriod: { type: String },
+  req_testPrice: { type: String },
+  req_testDesc: { type: String },
+
 
 });
 module.exports = RequestsModel;
