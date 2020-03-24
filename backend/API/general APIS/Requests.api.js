@@ -53,7 +53,7 @@ module.exports = function (app) {
         Request.req_category = cat
         Request.req_testPeriod = testPeriod
         Request.req_testPrice = testPrice
-        Request.req_testDesc = testDesc;
+        Request.req_testDesc = testDesc
 
       } else {
         resp.status(400).json("check test ID");
@@ -68,7 +68,7 @@ module.exports = function (app) {
         Request.req_p_phone = SelectedPatient.phone;
         await Request.save();
         SelectedPatient.requests.push(Request.id);
-        SelectedPatient.requests_name.push(Request.req_test);
+        // SelectedPatient.requests_name.push(Request.req_test);
         await SelectedPatient.save();
       }
 

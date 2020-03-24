@@ -11,6 +11,17 @@ var runAPIS = require("./API/index");
 const jwt = require("jsonwebtoken");
 
 //// MiddleWare
+
+app.use(
+  cors(
+    {
+      credentials: true,
+      origin: "http://localhost:4200",
+
+      allowedHeaders: true
+    }
+  )
+);
 app.use(express.json());
 app.use(
   session({
@@ -20,16 +31,7 @@ app.use(
     saveUninitialized: true
   })
 );
-app.use(
-  cors(
-    {
-      credentials: true,
-      origin: "http://localhost:4200",
 
-      // allowedHeaders: true
-    }
-  )
-);
 // app.use(function (req, resp, next) {
 //   resp.header("Access-Control-Allow-Origin", "*");
 //   resp.header("Access-Control-Allow-Headers", "Origin, X-Requested-With,Content-Type,Accept");
@@ -63,7 +65,7 @@ function Authenticate(req, resp, next) {
 }
 
 dbConnection();
-app.use(Authenticate);
+// app.use(Authenticate);
 runAPIS(app);
 
 app.get("/", (req, resp) => {
