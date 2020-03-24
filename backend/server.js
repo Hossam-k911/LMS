@@ -12,6 +12,8 @@ const jwt = require("jsonwebtoken");
 
 //// MiddleWare
 
+
+app.use(express.json());
 app.use(
   cors(
     {
@@ -23,7 +25,6 @@ app.use(
     }
   )
 );
-app.use(express.json());
 app.use(
   session({
     genid: uuid,
