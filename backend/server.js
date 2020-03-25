@@ -14,6 +14,15 @@ const jwt = require("jsonwebtoken");
 
 
 app.use(express.json());
+
+app.use(
+  session({
+    genid: uuid,
+    secret: "LMS Project",
+    resave: false,
+    saveUninitialized: true
+  })
+);
 app.use(
   cors(
     {
@@ -25,15 +34,6 @@ app.use(
     }
   )
 );
-app.use(
-  session({
-    genid: uuid,
-    secret: "LMS Project",
-    resave: false,
-    saveUninitialized: true
-  })
-);
-
 // app.use(function (req, resp, next) {
 //   resp.header("Access-Control-Allow-Origin", "*");
 //   resp.header("Access-Control-Allow-Headers", "Origin, X-Requested-With,Content-Type,Accept");
