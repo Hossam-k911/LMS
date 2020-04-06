@@ -33,7 +33,7 @@ app.use(
     }
   )
 );
-/ Add headers
+// Add headers
 app.use(function (req, res, next) {
 
   // Website you wish to allow to connect
