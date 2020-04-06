@@ -27,7 +27,7 @@ app.use(function (req, res, next) {
 
   // Website you wish to allow to connect
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
-  res.setHeader('x-auth-token', true);
+  res.setHeader('x-auth-token', this.token);
 
 
   // Request methods you wish to allow
@@ -80,7 +80,7 @@ function Authenticate(req, resp, next) {
   ) {
     next();
   } else {
-    const token = req.header("x-auth-token");
+    var token = req.header("x-auth-token");
     if (!token) return resp.status(401).send("Access Denied");
     try {
       const verified = jwt.verify(token, process.env.jwtPrivateKey);
