@@ -1,20 +1,18 @@
 // Declarations and Imports
 var express = require("express");
-var app = express();
 require("dotenv").config();
 var session = require("express-session");
 var uuid = require("uuid/v4");
 var cors = require("cors");
+var app = express();
 var cookieParser = require("cookie-parser");
 var dbConnection = require("./dbConnection");
 var runAPIS = require("./API/index");
 const jwt = require("jsonwebtoken");
 
 //// MiddleWare
-
-
+app.use(cors());
 app.use(express.json());
-
 app.use(
   session({
     genid: uuid,
@@ -23,21 +21,22 @@ app.use(
     saveUninitialized: true
   })
 );
-app.use(cors({
+app.options("*", cors());
+/*app.use(cors({
   'allowedHeaders': ['sessionId', 'Content-Type'],
   'exposedHeaders': ['sessionId'],
   origin: "http://localhost:4200",
   'methods': 'GET,HEAD,PUT,PATCH,POST,DELETE',
   'preflightContinue': false
-}));
+}));*/
 
-app.options("/*", function (req, res, next) {
+/*app.options("/*", function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
   res.sendStatus(200);
   next();
-});
+});*/
 
 app.all('*', function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
