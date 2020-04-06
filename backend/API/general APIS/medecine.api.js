@@ -53,4 +53,13 @@ module.exports = function createPatientsAPIS(app) {
       resp.status(400).send("error in Updating Medicines");
     }
   });
+  app.post("/delmedicine", async (req, resp) => {
+    try {
+      const { m_id } = req.body
+      await medicinesModel.remove({ _id: m_id });
+      resp.status(200).json('success');
+    } catch (err) {
+      resp.status(400).json("error deleting medicines");
+    }
+  });
 };
