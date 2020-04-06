@@ -26,8 +26,8 @@ app.use(
 app.use(function (req, res, next) {
 
   // Website you wish to allow to connect
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
-  res.setHeader('x-auth-token', this.token);
+  res.setHeader('Access-Control-Allow-Origin', 'x-auth-token', 'http://localhost:4200');
+
 
 
   // Request methods you wish to allow
