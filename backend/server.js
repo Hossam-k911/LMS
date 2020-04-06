@@ -26,7 +26,7 @@ app.use(
 app.use(cors({
   'allowedHeaders': ['sessionId', 'Content-Type'],
   'exposedHeaders': ['sessionId'],
-  'origin': '*',
+  origin: "http://localhost:4200",
   'methods': 'GET,HEAD,PUT,PATCH,POST,DELETE',
   'preflightContinue': false
 }));
