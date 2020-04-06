@@ -41,22 +41,22 @@ app.use(function (req, res, next) {
   // Pass to next layer of middleware
   next();
 });
-app.use(
-  cors(
-    {
-      credentials: true,
-      origin: "http://localhost:4200",
-      // // allowedHeaders: true,
-      // "Access-Control-Allow-Origin": {
-      //   "x-auth-token": true,
-      //   "Access-Control-Allow-Headers": true,
-      //   'Access-Control-Allow-Methods': 'GET,POST,OPTIONS,DELETE,PUT'
-      // },
+// app.use(
+//   cors(
+//     {
+//       credentials: true,
+//       origin: "http://localhost:4200",
+//       // // allowedHeaders: true,
+//       // "Access-Control-Allow-Origin": {
+//       //   "x-auth-token": true,
+//       //   "Access-Control-Allow-Headers": true,
+//       //   'Access-Control-Allow-Methods': 'GET,POST,OPTIONS,DELETE,PUT'
+//       // },
 
 
-    }
-  )
-);
+//     }
+//   )
+// );
 
 // app.use(function (req, resp, next) {
 //   resp.header("Access-Control-Allow-Origin", "*");
