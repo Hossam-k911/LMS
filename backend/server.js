@@ -31,9 +31,10 @@ app.use(
       // allowedHeaders: true,
       "Access-Control-Allow-Origin": {
         "x-auth-token": true,
+        "Access-Control-Allow-Headers": true,
+        'Access-Control-Allow-Methods': 'GET,POST,OPTIONS,DELETE,PUT'
       },
-      "Access-Control-Allow-Headers": true,
-      'Access-Control-Allow-Methods': 'GET,POST,OPTIONS,DELETE,PUT'
+
 
     }
   )
