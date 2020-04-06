@@ -28,9 +28,8 @@ app.use(
     {
       credentials: true,
       origin: "http://localhost:4200",
-
-
-      // allowedHeaders: true
+      allowedHeaders: true,
+      "Access-Control-Allow-Origin": true
     }
   )
 );
