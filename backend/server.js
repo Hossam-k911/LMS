@@ -44,10 +44,6 @@ app.all('*', function (req, res, next) {
   next();
 });
 
-app.use(cors())
-app.options('*', cors())
-
-
 
 
 
