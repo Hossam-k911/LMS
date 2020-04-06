@@ -62,7 +62,7 @@ app.use(
 // );
 
 app.use(function (req, resp, next) {
-  resp.header("Access-Control-Allow-Origin", "*");
+  resp.header("Access-Control-Allow-Origin", "*", "x-auth-token");
   resp.header("Access-Control-Allow-Headers", "Origin, X-Requested-With,Content-Type,Accept");
   resp.headers('Access-Control-Allow-Methods', 'GET,POST,OPTIONS,DELETE,PUT');
   EnableCorsAttribute('http://localhost:4200');
