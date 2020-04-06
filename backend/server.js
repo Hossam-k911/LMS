@@ -26,7 +26,7 @@ app.use(
 app.use(
   cors(
     {
-      allowedHeaders: { "Access-Control-Allow-Origin": "*" },
+      exposedHeaders: { "Access-Control-Allow-Origin": "*" },
       credentials: true,
       origin: "http://localhost:4200",
 
