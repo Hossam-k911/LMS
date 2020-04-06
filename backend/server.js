@@ -23,27 +23,24 @@ app.use(
     saveUninitialized: true
   })
 );
-// app.use(function (req, res, next) {
+app.use(function (req, res, next) {
 
-//   // Website you wish to allow to connect
-//   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+  // Website you wish to allow to connect
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
 
-//   res.setHeader('Access-Control-Allow-Origin', 'x-auth-token', true);
+  // Request methods you wish to allow
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
 
+  // Request headers you wish to allow
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
 
-//   // Request methods you wish to allow
-//   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  // Set to true if you need the website to include cookies in the requests sent
+  // to the API (e.g. in case you use sessions)
+  res.setHeader('Access-Control-Allow-Credentials', true);
 
-//   // Request headers you wish to allow
-//   res.setHeader('Access-Control-Allow-Headers', 'x-auth-token,content-type');
-
-//   // Set to true if you need the website to include cookies in the requests sent
-//   // to the API (e.g. in case you use sessions)
-//   res.setHeader('Access-Control-Allow-Credentials', true);
-
-//   // Pass to next layer of middleware
-//   next();
-// });
+  // Pass to next layer of middleware
+  next();
+});
 // app.use(
 //   cors(
 //     {
@@ -61,13 +58,13 @@ app.use(
 //   )
 // );
 
-app.use(function (req, resp, next) {
-  resp.header("Access-Control-Allow-Origin", "*");
-  resp.header("Access-Control-Allow-Headers", "Origin, X-Requested-With,Content-Type,Accept");
-  resp.headers('Access-Control-Allow-Methods', 'GET,POST,OPTIONS,DELETE,PUT');
-  EnableCorsAttribute('http://localhost:4200');
-  next();
-})
+// app.use(function (req, resp, next) {
+//   resp.header("Access-Control-Allow-Origin", "*");
+//   resp.header("Access-Control-Allow-Headers", "Origin, X-Requested-With,Content-Type,Accept");
+//   resp.headers('Access-Control-Allow-Methods', 'GET,POST,OPTIONS,DELETE,PUT');
+//   EnableCorsAttribute('http://localhost:4200');
+//   next();
+// })
 
 app.use(cookieParser());
 
