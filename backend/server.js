@@ -23,22 +23,6 @@ app.use(
     saveUninitialized: true
   })
 );
-app.use(
-  cors(
-    {
-      credentials: true,
-      origin: "http://localhost:4200",
-      // // allowedHeaders: true,
-      // "Access-Control-Allow-Origin": {
-      //   "x-auth-token": true,
-      //   "Access-Control-Allow-Headers": true,
-      //   'Access-Control-Allow-Methods': 'GET,POST,OPTIONS,DELETE,PUT'
-      // },
-
-
-    }
-  )
-);
 app.use(function (req, res, next) {
 
   // Website you wish to allow to connect
@@ -57,6 +41,23 @@ app.use(function (req, res, next) {
   // Pass to next layer of middleware
   next();
 });
+app.use(
+  cors(
+    {
+      credentials: true,
+      origin: "http://localhost:4200",
+      // // allowedHeaders: true,
+      // "Access-Control-Allow-Origin": {
+      //   "x-auth-token": true,
+      //   "Access-Control-Allow-Headers": true,
+      //   'Access-Control-Allow-Methods': 'GET,POST,OPTIONS,DELETE,PUT'
+      // },
+
+
+    }
+  )
+);
+
 // app.use(function (req, resp, next) {
 //   resp.header("Access-Control-Allow-Origin", "*");
 //   resp.header("Access-Control-Allow-Headers", "Origin, X-Requested-With,Content-Type,Accept");
