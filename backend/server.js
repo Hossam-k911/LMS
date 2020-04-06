@@ -38,7 +38,7 @@ app.use(function (req, res, next) {
   // Set to true if you need the website to include cookies in the requests sent
   // to the API (e.g. in case you use sessions)
   res.setHeader('Access-Control-Allow-Credentials', true);
-  EnableCorsAttribute('http://localhost:4200');
+
   // Pass to next layer of middleware
   next();
 });
