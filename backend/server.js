@@ -25,12 +25,12 @@ app.use(
 );
 app.use(
   cors(
-    {
-      // credentials: true,
-      // origin: "http://localhost:4200",
 
-      // allowedHeaders: true
-    }
+    // credentials: true,
+    // origin: "http://localhost:4200",
+
+    // allowedHeaders: true
+
   )
 );
 // Add headers
