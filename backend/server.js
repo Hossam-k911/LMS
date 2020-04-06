@@ -29,7 +29,8 @@ app.use(
       credentials: true,
       origin: "http://localhost:4200",
       allowedHeaders: true,
-      "Access-Control-Allow-Origin": true
+      "Access-Control-Allow-Origin": true,
+      "x-auth-token": true
     }
   )
 );
