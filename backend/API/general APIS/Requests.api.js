@@ -165,8 +165,8 @@ module.exports = function (app) {
     }
   });
 
-  // app.get("/delRequests", async (req, resp) => {
-  //   let output = await RequestsModel.remove({});
-  //   resp.json(output);
-  // });
+  app.get("/delRequests", async (req, resp) => {
+    let output = await RequestsModel.remove({});
+    resp.json(output);
+  });
 };
