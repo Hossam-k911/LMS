@@ -62,4 +62,38 @@ module.exports = function createPatientsAPIS(app) {
       resp.status(400).json("error deleting medicines");
     }
   });
+
+
+
+  app.put(`/editmedicine/:m_id`, async (req, resp) => {
+    try {
+      const { m_id } = req.params;
+      medicinesModel.findOne({ _id: m_id }, function (err, foundObject) {
+        if (err) {
+          resp.status(500).json("error 1");
+        } else {
+          if (req.body.medicine_Name) {
+            foundObject.medicine_Name = req.body.medicine_Name;
+          }
+          if (req.body.medicine_Price) {
+            foundObject.medicine_Price = req.body.medicine_Price;
+          }
+          if (req.body.medicine_Description) {
+            foundObject.medicine_Description = req.body.medicine_Description;
+          }
+          if (req.body.medicine_Quantity) {
+            foundObject.medicine_Quantity = req.body.medicine_Quantity;
+          }
+
+          foundObject.save(function (err, updateObject) {
+            if (err) {
+              resp.status(500).send();
+            } else {
+              resp.send(updateObject);
+            }
+          });
+        }
+      });
+    } catch (err) { }
+  });
 };
