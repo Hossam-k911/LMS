@@ -63,7 +63,18 @@ module.exports = function createPatientsAPIS(app) {
     }
   });
 
+  app.get(`/getMedicinebyid/:m_id`, async (req, resp) => {
+    try {
+      const { m_id } = req.params;
 
+      let medicine = await medicinesModel.findOne({ _id: m_id })
+      resp.status(200).json(medicine);
+
+    } catch (err) {
+      resp.status(400).json("error fetching medicine check medicine ID ");
+
+    }
+  })
 
   app.put(`/editmedicine/:m_id`, async (req, resp) => {
     try {
