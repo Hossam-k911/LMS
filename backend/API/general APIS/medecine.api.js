@@ -16,7 +16,8 @@ module.exports = function createPatientsAPIS(app) {
         medicine_Name,
         medicine_Price,
         medicine_Description,
-        medicine_Quantity
+        medicine_Quantity,
+        medicine_ImageUrl
       });
       await medicine.save();
 
@@ -94,6 +95,9 @@ module.exports = function createPatientsAPIS(app) {
           }
           if (req.body.medicine_Quantity) {
             foundObject.medicine_Quantity = req.body.medicine_Quantity;
+          }
+          if (req.body.medicine_ImageUrl) {
+            foundObject.medicine_ImageUrl = req.body.medicine_ImageUrl;
           }
 
           foundObject.save(function (err, updateObject) {

@@ -6,6 +6,7 @@ var MedecinesModel = new mongoose.model("Medicines", {
   medicine_Price: String,
   medicine_Description: String,
   medicine_Quantity: Number,
+  medicine_ImageUrl: String,
 
   patient: { type: mongoose.Schema.Types.ObjectId, ref: "Patients" }
 });
