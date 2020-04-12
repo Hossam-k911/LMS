@@ -5,7 +5,7 @@ var MedecinesModel = new mongoose.model("Medicines", {
   medicine_Name: String,
   medicine_Price: String,
   medicine_Description: String,
-  medicine_Quantity: Number,
+  medicine_Quantity: String,
   medicine_ImageUrl: String,
   medicine_Unit: String,
 
