@@ -9,7 +9,8 @@ module.exports = function createPatientsAPIS(app) {
         medicine_Name,
         medicine_Price,
         medicine_Description,
-        medicine_Quantity
+        medicine_Quantity,
+        medicine_ImageUrl
       } = req.body;
       let medicine = new medicinesModel({
         _id: mongoose.Types.ObjectId(),
