@@ -25,7 +25,17 @@ module.exports = function categoriesAPI(app) {
     let categories = await CategoriesModel.find({});
     resp.json(categories);
   });
+  app.get(`/getcategorybyid/:cat_id`, async (req, resp) => {
+    try {
+      const { cat_id } = req.params;
+      let Category = await CategoriesModel.findOne({ _id: cat_id });
+      let arr = Category.category_medical_tests
+      resp.status(200).json(arr);
+    } catch (err) {
+      resp.status(400).json("error fetching Category .. check category ID");
 
+    }
+  })
 
   // add new Medical test to specific category
   app.post("/addtest", async (req, resp) => {
