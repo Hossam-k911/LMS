@@ -29,7 +29,7 @@ module.exports = function (app) {
         req_status,
         req_time,
         req_date,
-        req_comments,
+        req_comment,
         req_test,
         req_p_id,
         req_p_name,
