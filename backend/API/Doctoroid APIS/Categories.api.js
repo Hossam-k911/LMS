@@ -46,7 +46,8 @@ module.exports = function categoriesAPI(app) {
         test_period,
         test_price,
         test_description,
-        test_questions
+        test_precautions_en,
+        test_precautions_ar
       } = req.body;
       let Selectedcategory = await CategoriesModel.findOne({ _id: cat_id });
       if (Selectedcategory) {
@@ -56,7 +57,8 @@ module.exports = function categoriesAPI(app) {
           test_period,
           test_price,
           test_description,
-          test_questions
+          test_precautions_en,
+          test_precautions_ar
         });
       }
       await Selectedcategory.save();
