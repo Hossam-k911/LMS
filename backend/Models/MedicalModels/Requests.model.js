@@ -15,6 +15,7 @@ let RequestsModel = new mongoose.model("Requests", {
   req_testPeriod: { type: String },
   req_testPrice: { type: String },
   req_testDesc: { type: String },
+  c_id: { type: String }
 
 
 });
