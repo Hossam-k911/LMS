@@ -12,7 +12,7 @@ module.exports = function (app) {
         req_status,
         req_time,
         req_date,
-        req_answers,
+        req_comment,
         req_test,
         req_p_id,
         req_p_name,
@@ -29,7 +29,7 @@ module.exports = function (app) {
         req_status,
         req_time,
         req_date,
-        req_answers,
+        req_comments,
         req_test,
         req_p_id,
         req_p_name,
@@ -120,13 +120,13 @@ module.exports = function (app) {
             foundObject.req_time = req.body.req_time;
           }
           if (req.body.req_date) {
-            foundObject.req.date = req.body.req.date;
+            foundObject.req_date = req.body.req_date;
           }
           if (req.body.req_notes) {
             foundObject.req_notes = req.body.req_notes;
           }
-          if (req.body.req_answers) {
-            foundObject.req.answers = req.body.req.answers;
+          if (req.body.req_comment) {
+            foundObject.req_comment = req.body.req_comment;
           }
           foundObject.save(function (err, updateObject) {
             if (err) {
