@@ -27,6 +27,7 @@ module.exports = function (app) {
       let Request = new RequestsModel({
         _id: mongoose.Types.ObjectId(),
         c_id,
+        t_id,
         req_status,
         req_time,
         req_date,

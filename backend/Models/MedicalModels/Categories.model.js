@@ -12,7 +12,6 @@ let CategoriesModel = new mongoose.model("Categories", {
       test_price: Number,
       test_precautions_en: String,
       test_precautions_ar: String,
-
       test_description: String
     }
   ]
