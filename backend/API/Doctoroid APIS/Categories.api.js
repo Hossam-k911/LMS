@@ -1,5 +1,6 @@
 var mongoose = require("mongoose");
 var CategoriesModel = require("../../Models/MedicalModels/Categories.model");
+var lodash = require("lodash")
 module.exports = function categoriesAPI(app) {
 
 
@@ -37,6 +38,31 @@ module.exports = function categoriesAPI(app) {
     }
   })
 
+
+  app.post(`/getprecautions/:cat_id`, async (req, resp) => {
+    try {
+      const { cat_id } = req.params;
+      const { t_id } = req.body
+      let Category = await CategoriesModel.findOne({ _id: cat_id });
+      var test = lodash.filter(Category.category_medical_tests, x => x.id === t_id)
+      if (test) {
+        let en_pre = test[0].test_precautions_en;
+        let ar_pre = test[0].test_precautions_ar;
+        resp.status(200).json({ english: en_pre, arabic: ar_pre });
+      }
+
+    } catch (err) {
+      resp.status(400).json("error fetching Category .. check category ID");
+
+    }
+  })
+  app.post('/getpre', async (req, resp) => {
+    try {
+      const { t_id, cat_id } = req.body
+      let selectedCat = await CategoriesModel.find({ _id: cat_id });
+      // let selectedTest = await
+    } catch (err) { }
+  })
   // add new Medical test to specific category
   app.post("/addtest", async (req, resp) => {
     try {
