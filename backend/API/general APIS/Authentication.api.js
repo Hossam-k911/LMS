@@ -2,7 +2,7 @@ var PatientsModel = require("../../Models/MedicalModels/patient.model");
 const jwt = require("jsonwebtoken");
 // const bcrypt = require("bcryptjs");
 require("dotenv").config();
-module.exports = function(app) {
+module.exports = function (app) {
   function generateAccessToken() {
     const token = jwt.sign(
       {
@@ -26,7 +26,7 @@ module.exports = function(app) {
       const token = generateAccessToken();
       let confirm = user.confirm;
       let userId = user._id
-      resp.header("x-auth-token", token).send({"token":token,"confirm":confirm,"p_id":userId});
+      resp.header("x-auth-token", token).send({ "token": token, "confirm": confirm, "p_id": userId });
     } else {
       resp.status(400).send(error.message);
     }
