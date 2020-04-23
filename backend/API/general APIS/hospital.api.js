@@ -1,6 +1,6 @@
 var mongoose = require("mongoose");
 var HospitalModel = require("../../Models/MedicalModels/hospital.model");
-module.exports = function(app) {
+module.exports = function (app) {
   app.post("/hospitaldata", async (req, resp) => {
     try {
       const {
@@ -40,5 +40,58 @@ module.exports = function(app) {
   app.get("/hospitalinfo", async (req, resp) => {
     let hospital = await HospitalModel.find({});
     resp.json(hospital);
+  });
+
+
+  app.put("/edithospital", async (req, resp) => {
+    try {
+      const { hos_id } = req.body;
+      RequestsModel.findOne({ _id: hos_id }, function (err, foundObject) {
+        if (err) {
+          resp.status(500).json("error 1");
+        } else {
+          if (req.body.hospital_name) {
+            foundObject.hospital_name = req.body.hospital_name;
+          }
+          if (req.body.hospital_location) {
+            foundObject.hospital_location = req.body.hospital_location;
+          }
+          if (req.body.hospital_phone) {
+            foundObject.hospital_phone = req.body.hospital_phone;
+          }
+          if (req.body.hospital_website) {
+            foundObject.hospital_website = req.body.hospital_website;
+          }
+          if (req.body.hospital_facebook) {
+            foundObject.hospital_facebook = req.body.hospital_facebook;
+          }
+          if (req.body.hospital_email) {
+            foundObject.hospital_email = req.body.hospital_email;
+          }
+          if (req.body.hospital_generalManager) {
+            foundObject.hospital_generalManager = req.body.hospital_generalManager;
+          }
+          if (req.body.hospital_adminstratonManager) {
+            foundObject.hospital_adminstratonManager = req.body.hospital_adminstratonManager;
+          }
+          if (req.body.hospital_itManager) {
+            foundObject.hospital_itManager = req.body.hospital_itManager;
+          }
+          if (req.body.hospital_MarketingManager) {
+            foundObject.hospital_MarketingManager = req.body.hospital_MarketingManager;
+          }
+          if (req.body.hospital_PurchasingManager) {
+            foundObject.hospital_PurchasingManager = req.body.hospital_PurchasingManager;
+          }
+          foundObject.save(function (err, updateObject) {
+            if (err) {
+              resp.status(500).send();
+            } else {
+              resp.send(updateObject);
+            }
+          });
+        }
+      });
+    } catch (err) { }
   });
 };
