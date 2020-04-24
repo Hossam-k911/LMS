@@ -32,51 +32,17 @@ module.exports = function createPatientsAPIS(app) {
     }
   });
 
-  // app.get("/removeallpatients", async (req, resp) => {
-  //   let output = await patientModel.remove({});
-  //   resp.json({ message: "success", result: output });
-  // });
-
-  app.post("/updatepatient", async (req, resp) => {
-    try {
-      const {
-        p_id,
-        firstName,
-        lastName,
-        email,
-        password,
-        phone,
-        gender,
-        location,
-        date,
-        medicines: m_id
-      } = req.body;
-
-      let output = await patientModel.findOneAndUpdate(
-        { _id: p_id },
-        {
-          firstName,
-          lastName,
-          email,
-          password,
-          phone,
-          gender,
-          location,
-          date,
-          m_id
-        }
-      );
-      await output.save();
-      resp.status(200).json(output);
-    } catch (err) {
-      resp.status(400).json("error in editing patient");
-    }
+  app.get("/removeallpatients", async (req, resp) => {
+    let output = await patientModel.remove({});
+    resp.json({ message: "success", result: output });
   });
 
-  app.put("/edit/:id", async (req, resp) => {
+
+
+  app.put("/editpatient/:id", async (req, resp) => {
     try {
       var id = req.params.id;
-      patientModel.findOne({ _id: id }, function(err, foundObject) {
+      patientModel.findOne({ _id: id }, function (err, foundObject) {
         if (err) {
           resp.status(500).json("error 1");
         } else {
@@ -113,7 +79,7 @@ module.exports = function createPatientsAPIS(app) {
             if (req.body.medicines) {
               foundObject.medicines = req.body.medicines;
             }
-            foundObject.save(function(err, updateObject) {
+            foundObject.save(function (err, updateObject) {
               if (err) {
                 resp.status(500).send();
               } else {
@@ -123,6 +89,41 @@ module.exports = function createPatientsAPIS(app) {
           }
         }
       });
-    } catch (err) {}
+    } catch (err) { }
   });
+  // app.post("/updatepatient", async (req, resp) => {
+  //   try {
+  //     const {
+  //       p_id,
+  //       firstName,
+  //       lastName,
+  //       email,
+  //       password,
+  //       phone,
+  //       gender,
+  //       location,
+  //       date,
+  //       medicines: m_id
+  //     } = req.body;
+
+  //     let output = await patientModel.findOneAndUpdate(
+  //       { _id: p_id },
+  //       {
+  //         firstName,
+  //         lastName,
+  //         email,
+  //         password,
+  //         phone,
+  //         gender,
+  //         location,
+  //         date,
+  //         m_id
+  //       }
+  //     );
+  //     await output.save();
+  //     resp.status(200).json(output);
+  //   } catch (err) {
+  //     resp.status(400).json("error in editing patient");
+  //   }
+  // });
 };
