@@ -56,13 +56,7 @@ module.exports = function categoriesAPI(app) {
 
     }
   })
-  app.post('/getpre', async (req, resp) => {
-    try {
-      const { t_id, cat_id } = req.body
-      let selectedCat = await CategoriesModel.find({ _id: cat_id });
-      // let selectedTest = await
-    } catch (err) { }
-  })
+
   // add new Medical test to specific category
   app.post("/addtest", async (req, resp) => {
     try {
@@ -127,44 +121,4 @@ module.exports = function categoriesAPI(app) {
       resp.status(400).send("error .. check request ID ");
     }
   });
-  app.put(`/editcategory/:cat_id`, async (req, resp) => {
-    try {
-
-      const { cat_id } = req.params;
-      const { t_id } = req.body;
-      await CategoriesModel.findOne({ _id: cat_id }, function (err, foundObject) {
-        if (err) {
-          resp.status(500).json("error 1");
-        } else {
-          if (req.body.category_title) {
-            foundObject.category_title = req.body.category_title;
-          }
-          if (req.body.category_imgLink) {
-            foundObject.category_imgLink = req.body.category_imgLink;
-          }
-
-          for (i = 0; i < category_medical_tests.length; i++) {
-            if (category_medical_tests[i].id = t_id) {
-              if (req.body.category_medical_tests.test_title) {
-                foundObject.category_medical_tests.test_title = req.body.category_medical_tests.test_title;
-              }
-            }
-          }
-
-          foundObject.save(function (err, updateObject) {
-            if (err) {
-              resp.status(500).send();
-            } else {
-              resp.send(updateObject);
-            }
-          });
-        }
-      });
-
-
-
-    } catch (err) { }
-  });
-
-
 };
