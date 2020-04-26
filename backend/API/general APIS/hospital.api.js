@@ -41,7 +41,18 @@ module.exports = function (app) {
     let hospital = await HospitalModel.findOne({});
     resp.json(hospital);
   });
+  app.get(`/gethospital/:hos_id`, async (req, resp) => {
+    try {
+      const { hos_id } = req.params;
 
+      let hospital = await HospitalModel.findOne({ _id: hos_id })
+      resp.status(200).json(hospital);
+
+    } catch (err) {
+      resp.status(400).json("error fetching medicine check medicine ID ");
+
+    }
+  })
 
   app.put("/edithospital", async (req, resp) => {
     try {
