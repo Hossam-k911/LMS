@@ -7,12 +7,13 @@ module.exports = function categoriesAPI(app) {
   // Add new Medical Category 
   app.post("/addcategory", async (req, resp) => {
     try {
-      const { category_title, category_imgLink } = req.body;
+      const { category_title, category_imgLink, category_description } = req.body;
 
       let Category = new CategoriesModel({
         _id: mongoose.Types.ObjectId(),
         category_title,
-        category_imgLink
+        category_imgLink,
+        category_description
       });
       await Category.save();
       resp.status(200).json(Category);
@@ -20,7 +21,34 @@ module.exports = function categoriesAPI(app) {
       resp.status(400).json("error adding Category");
     }
   });
+  app.put(`/editcategory`, async (req, resp) => {
+    try {
+      const { cat_id } = req.body;
+      CategoriesModel.findOne({ _id: cat_id }, function (err, foundObject) {
+        if (err) {
+          resp.status(500).json("error 1");
+        } else {
+          if (req.body.category_title) {
+            foundObject.category_title = req.body.category_title;
+          }
+          if (req.body.category_imgLink) {
+            foundObject.category_imgLink = req.body.category_imgLink;
+          }
+          if (req.body.category_description) {
+            foundObject.category_description = req.body.category_description;
+          }
 
+          foundObject.save(function (err, updateObject) {
+            if (err) {
+              resp.status(500).send();
+            } else {
+              resp.send(updateObject);
+            }
+          });
+        }
+      });
+    } catch (err) { }
+  });
   // Fetching all categories from Categories Collection
   app.get("/listcategories", async (req, resp) => {
     let categories = await CategoriesModel.find({});
