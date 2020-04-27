@@ -57,7 +57,7 @@ module.exports = function (app) {
   app.put("/edithospital", async (req, resp) => {
     try {
       const { hos_id } = req.body;
-      RequestsModel.findOne({ _id: hos_id }, function (err, foundObject) {
+      HospitalModel.findOne({ _id: hos_id }, function (err, foundObject) {
         if (err) {
           resp.status(500).json("error 1");
         } else {
