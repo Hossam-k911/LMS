@@ -41,11 +41,11 @@ module.exports = function (app) {
     let hospital = await HospitalModel.findOne({});
     resp.json(hospital);
   });
-  app.get(`/gethospital/:hos_id`, async (req, resp) => {
+  app.get(`/gethospital`, async (req, resp) => {
     try {
-      const { hos_id } = req.params;
 
-      let hospital = await HospitalModel.findOne({ _id: hos_id })
+
+      let hospital = await HospitalModel.findOne({})
       resp.status(200).json(hospital);
 
     } catch (err) {
