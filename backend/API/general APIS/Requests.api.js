@@ -49,10 +49,10 @@ module.exports = function (app) {
       // let SelectedTest = Selectedcategory.category_medical_tests[0];
       var test = lodash.filter(Selectedcategory.category_medical_tests, x => x.id === t_id)
       if (test) {
-        var testPeriod = test.test_period;
-        var testPrice = test.test_price;
-        var testDesc = test.test_description;
-        var testTitle = test.test_title;
+        var testPeriod = test[0].test_period;
+        var testPrice = test[0].test_price;
+        var testDesc = test[0].test_description;
+        var testTitle = test[0].test_title;
 
         Request.req_test = testTitle;
         Request.req_notes = "Empty";
