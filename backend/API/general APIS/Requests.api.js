@@ -56,6 +56,7 @@ module.exports = function (app) {
 
         Request.req_test = testTitle;
         Request.req_notes = "Empty";
+        Request.req_status = "Pending";
         Request.req_category = cat
         Request.req_testPeriod = testPeriod
         Request.req_testPrice = testPrice
