@@ -141,38 +141,38 @@ module.exports = function (app) {
 
 
 
-  // app.put("/editreq", async (req, resp) => {
-  //   try {
-  //     const { req_id } = req.body;
-  //     RequestsModel.findOne({ _id: req_id }, function (err, foundObject) {
-  //       if (err) {
-  //         resp.status(500).json("error 1");
-  //       } else {
-  //         if (req.body.req_status) {
-  //           foundObject.req_status = req.body.req_status;
-  //         }
-  //         if (req.body.req_time) {
-  //           foundObject.req_time = req.body.req_time;
-  //         }
-  //         if (req.body.req_date) {
-  //           foundObject.req_date = req.body.req_date;
-  //         }
-  //         if (req.body.req_notes) {
-  //           foundObject.req_notes = req.body.req_notes;
-  //         }
-  //         if (req.body.req_comment) {
-  //           foundObject.req_comment = req.body.req_comment;
-  //         }
-  //         foundObject.save(function (err, updateObject) {
-  //           if (err) {
-  //             resp.status(500).send();
-  //           } else {
-  //             resp.send(updateObject);
-  //           }
-  //         });
-  //       }
-  //     });
-  //   } catch (err) { }
-  // });
+  app.put("/editreq", async (req, resp) => {
+    try {
+      const { req_id } = req.body;
+      RequestsModel.findOne({ _id: req_id }, function (err, foundObject) {
+        if (err) {
+          resp.status(500).json("error 1");
+        } else {
+          if (req.body.req_status) {
+            foundObject.req_status = req.body.req_status;
+          }
+          if (req.body.req_time) {
+            foundObject.req_time = req.body.req_time;
+          }
+          if (req.body.req_date) {
+            foundObject.req_date = req.body.req_date;
+          }
+          if (req.body.req_notes) {
+            foundObject.req_notes = req.body.req_notes;
+          }
+          if (req.body.req_comment) {
+            foundObject.req_comment = req.body.req_comment;
+          }
+          foundObject.save(function (err, updateObject) {
+            if (err) {
+              resp.status(500).send();
+            } else {
+              resp.send(updateObject);
+            }
+          });
+        }
+      });
+    } catch (err) { }
+  });
 
 };
