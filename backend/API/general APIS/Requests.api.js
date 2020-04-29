@@ -52,7 +52,9 @@ module.exports = function (app) {
         var testPeriod = test.test_period;
         var testPrice = test.test_price;
         var testDesc = test.test_description;
-        Request.req_test = test.test_title;
+        var testTitle = test.test_title;
+
+        Request.req_test = testTitle;
         Request.req_notes = "Empty";
         Request.req_category = cat
         Request.req_testPeriod = testPeriod
