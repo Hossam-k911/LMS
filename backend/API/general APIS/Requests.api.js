@@ -2,6 +2,8 @@ var mongoose = require("mongoose");
 var RequestsModel = require("../../Models/MedicalModels/Requests.model");
 var CategoriesModel = require("../../Models/MedicalModels/Categories.model");
 var PatientsModel = require("../../Models/MedicalModels/patient.model");
+var lodash = require("lodash")
+
 // var _ = require("lodash");
 module.exports = function (app) {
   app.post("/addreq", async (req, resp) => {
@@ -44,25 +46,27 @@ module.exports = function (app) {
       });
       let Selectedcategory = await CategoriesModel.findOne({ _id: c_id });
       var cat = Selectedcategory.category_title;
-      let SelectedTest = Selectedcategory.category_medical_tests[0];
-      var testPeriod = SelectedTest.test_period;
-      var testPrice = SelectedTest.test_price;
-      var testDesc = SelectedTest.test_description;
-
-      if (SelectedTest.id == t_id) {
-        Request.req_test = SelectedTest.test_title;
+      // let SelectedTest = Selectedcategory.category_medical_tests[0];
+      var test = lodash.filter(Selectedcategory.category_medical_tests, x => x.id === t_id)
+      if (test) {
+        var testPeriod = test.test_period;
+        var testPrice = test.test_price;
+        var testDesc = test.test_description;
+        Request.req_test = test.test_title;
         Request.req_notes = "Empty";
         Request.req_category = cat
         Request.req_testPeriod = testPeriod
         Request.req_testPrice = testPrice
         Request.req_testDesc = testDesc
 
-      } else {
-        resp.status(400).json("check test ID");
       }
+      // if (SelectedTest.id == t_id) {
 
+
+      // } else {
+      //   resp.status(400).json("check test ID");
+      // }
       await Request.save();
-
       let SelectedPatient = await PatientsModel.findOne({ _id: req_p_id });
       if (SelectedPatient) {
         Request.req_p_name =
