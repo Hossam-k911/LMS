@@ -17,11 +17,11 @@ const crypto = require("crypto");
 const GridFsStorage = require("multer-gridfs-storage");
 const methodOverride = require('method-override');
 const mongoose = require("mongoose");
-
-app.use(methodOverride('_method'));
-app.set('view engine', 'ejs');
-//// MiddleWare
 app.use(cors());
+app.use(methodOverride('_method'));
+// app.set('view engine', 'ejs');
+//// MiddleWare
+
 app.use(express.json());
 app.use(
   session({
@@ -162,8 +162,8 @@ const upload = multer({ storage });
 
 
 app.get("/", (req, resp) => {
-  // resp.send("LMS IS CREATED .............");
-  resp.render('index');
+  resp.send("LMS IS CREATED .............");
+  // resp.render('index');
 });
 
 app.post('/upload', upload.single('file'), (req, resp) => {
