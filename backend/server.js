@@ -17,11 +17,13 @@ const crypto = require("crypto");
 const GridFsStorage = require("multer-gridfs-storage");
 const methodOverride = require('method-override');
 const mongoose = require("mongoose");
-app.use(cors());
-app.use(methodOverride('_method'));
+
 // app.set('view engine', 'ejs');
 //// MiddleWare
+app.use(cors());
+app.options("*", cors());
 
+app.use(methodOverride('_method'));
 app.use(express.json());
 app.use(
   session({
@@ -31,22 +33,7 @@ app.use(
     saveUninitialized: true
   })
 );
-app.options("*", cors());
-/*app.use(cors({
-  'allowedHeaders': ['sessionId', 'Content-Type'],
-  'exposedHeaders': ['sessionId'],
-  origin: "http://localhost:4200",
-  'methods': 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  'preflightContinue': false
-}));*/
 
-/*app.options("/*", function (req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
-  res.sendStatus(200);
-  next();
-});*/
 
 app.all('*', function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -54,50 +41,6 @@ app.all('*', function (req, res, next) {
 });
 
 
-
-
-
-
-
-
-
-
-// app.use(
-//   cors(
-//     {
-//       allowedHeaders: "Access-Control-Allow-Origin",
-//       credentials: true,
-//       origin: "http://localhost:4200",
-
-//       // allowedHeaders: true
-//     }
-//   )
-// );
-// Add headers
-// app.use(function (req, res, next) {
-
-//   // Website you wish to allow to connect
-//   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
-
-//   // Request methods you wish to allow
-//   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-
-//   // Request headers you wish to allow
-//   res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-
-//   // Set to true if you need the website to include cookies in the requests sent
-//   // to the API (e.g. in case you use sessions)
-//   res.setHeader('Access-Control-Allow-Credentials', true);
-
-//   // Pass to next layer of middleware
-//   next();
-// });
-// app.use(function (req, resp, next) {
-//   resp.header("Access-Control-Allow-Origin", "*");
-//   resp.header("Access-Control-Allow-Headers", "Origin, X-Requested-With,Content-Type,Accept");
-//   resp.headers('Access-Control-Allow-Methods', 'GET,POST,OPTIONS,DELETE,PUT');
-//   next();
-// })
 
 app.use(cookieParser());
 
@@ -124,7 +67,7 @@ function Authenticate(req, resp, next) {
   }
 }
 
-// dbConnection();
+dbConnection();
 // app.use(Authenticate);
 runAPIS(app);
 
