@@ -3,6 +3,7 @@ var RequestsModel = require("../../Models/MedicalModels/Requests.model");
 var CategoriesModel = require("../../Models/MedicalModels/Categories.model");
 var PatientsModel = require("../../Models/MedicalModels/patient.model");
 var lodash = require("lodash")
+var resultsModel = require("../../Models/MedicalModels/results.model")
 
 // var _ = require("lodash");
 module.exports = function (app) {
@@ -86,6 +87,31 @@ module.exports = function (app) {
       resp.status(400).json(" error requesting ");
     }
   });
+
+
+  app.get("/accepted", async (req, resp) => {
+    try {
+      let test = await RequestsModel.find({});
+      var acceptedTest = lodash.filter(test, x => x.req_status === "Accepted")
+      if (acceptedTest) {
+        let acceptedReq = new resultsModel({
+          _id: mongoose.Types.ObjectId(),
+          accepted_requests: acceptedTest
+        })
+        // acceptedReq.accepted_requests.push(acceptedTest);
+        await acceptedReq.save();
+        resp.status(200).json(acceptedReq.accepted_requests);
+      }
+
+
+
+    } catch (err) {
+      resp.status(400).json(" error finding accepted requests ");
+
+    }
+  })
+
+
 
   app.get("/getreq", async (req, resp) => {
     let Req = await RequestsModel.find({});

@@ -1,6 +1,6 @@
 var mongoose = require("mongoose");
-let ResultsModel = new mongoose.model("Requests", {
+let ResultsModel = new mongoose.model("Results", {
     _id: mongoose.Schema.Types.ObjectId,
-    files: { type: Array }
+    accepted_requests: { type: Array }
 });
 module.exports = ResultsModel;
