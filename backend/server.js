@@ -21,8 +21,9 @@ const mongoose = require("mongoose");
 // app.set('view engine', 'ejs');
 //// MiddleWare
 app.use(cors());
-app.options("*", cors());
-// app.use(Authenticate);
+app.options("*", cors(),
+  app.use(Authenticate));
+
 
 app.use(methodOverride('_method'));
 app.use(express.json());
@@ -34,19 +35,6 @@ app.use(
     saveUninitialized: true
   })
 );
-
-
-app.all('*', function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  next();
-});
-
-
-
-app.use(cookieParser());
-
-//// Authentication
-
 function Authenticate(req, resp, next) {
   if (
     req.url === "/signup" ||
@@ -56,7 +44,7 @@ function Authenticate(req, resp, next) {
   ) {
     next();
   } else {
-    const token = req.header("x-auth-token");
+    var token = req.header("x-auth-token");
     if (!token) return resp.status(401).send("Access Denied");
     try {
       const verified = jwt.verify(token, process.env.jwtPrivateKey);
@@ -67,6 +55,39 @@ function Authenticate(req, resp, next) {
     }
   }
 }
+
+app.all('*', function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+
+  next();
+});
+
+
+
+app.use(cookieParser());
+
+//// Authentication
+
+// function Authenticate(req, resp, next) {
+//   if (
+//     req.url === "/signup" ||
+//     req.url === "/signin" ||
+//     req.url === "/" ||
+//     req.url === "/dashboard/signin"
+//   ) {
+//     next();
+//   } else {
+//     const token = req.header("x-auth-token");
+//     if (!token) return resp.status(401).send("Access Denied");
+//     try {
+//       const verified = jwt.verify(token, process.env.jwtPrivateKey);
+//       req.user = verified;
+//       next();
+//     } catch (err) {
+//       resp.status(400).send("Invalid Token");
+//     }
+//   }
+// }
 
 dbConnection();
 runAPIS(app);
