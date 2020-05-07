@@ -22,6 +22,7 @@ const mongoose = require("mongoose");
 //// MiddleWare
 app.use(cors());
 app.options("*", cors());
+app.use(Authenticate);
 
 app.use(methodOverride('_method'));
 app.use(express.json());
@@ -68,7 +69,6 @@ function Authenticate(req, resp, next) {
 }
 
 dbConnection();
-app.use(Authenticate);
 runAPIS(app);
 
 
