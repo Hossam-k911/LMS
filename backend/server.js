@@ -22,7 +22,7 @@ const mongoose = require("mongoose");
 //// MiddleWare
 app.use(cors());
 app.options("*", cors());
-app.use(Authenticate);
+// app.use(Authenticate);
 
 app.use(methodOverride('_method'));
 app.use(express.json());
