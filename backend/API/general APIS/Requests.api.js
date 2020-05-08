@@ -140,7 +140,30 @@ module.exports = function (app) {
       resp.status(400).json(" error finding accepted requests ");
     }
   })
+  app.post("/rejectreq", async (req, resp) => {
+    try {
+      const { req_id } = req.body
+      let selectedReq = await RequestsModel.findOne({ _id: req_id });
+      selectedReq.req_status = "Rejected";
+      await selectedReq.save();
 
+      resp.status(200).json(selectedReq);
+    } catch (err) {
+      resp.status(400).json(" error finding accepted requests ");
+    }
+  })
+  app.post("/pendreq", async (req, resp) => {
+    try {
+      const { req_id } = req.body
+      let selectedReq = await RequestsModel.findOne({ _id: req_id });
+      selectedReq.req_status = "Pending";
+      await selectedReq.save();
+
+      resp.status(200).json(selectedReq);
+    } catch (err) {
+      resp.status(400).json(" error finding accepted requests ");
+    }
+  })
 
 
 
