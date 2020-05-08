@@ -89,24 +89,59 @@ module.exports = function (app) {
   });
 
 
-  app.get("/accepted", async (req, resp) => {
+  // app.get("/accepted", async (req, resp) => {
+  //   try {
+  //     let test = await RequestsModel.find({});
+  //     var acceptedTest = lodash.filter(test, x => x.req_status === "Accepted")
+  //     //acceptedTest[0]._id
+  //      // result f array
+  //     if (acceptedTest) {
+
+  //         let existedRes =  await resultsModel.findOne()
+
+  //       for (i = 0; i < acceptedTest.length; i++) {
+  //         var acceptedReq = new resultsModel({
+  //           _id: mongoose.Types.ObjectId(),
+  //           result_file_id: "NULL",
+  //           accepted_request: {}
+
+  //         })
+  //         acceptedReq.accepted_request = acceptedTest[i];
+  //         await acceptedReq.save();
+  //       }
+
+  //       // acceptedReq.accepted_requests.push(acceptedTest);
+
+  //       resp.status(200).json({ acceptedReq });
+  //     }
+  //   } catch (err) {
+  //     resp.status(400).json(" error finding accepted requests ");
+
+  //   }
+  // })
+
+
+
+  app.post("/acceptreq", async (req, resp) => {
     try {
-      let test = await RequestsModel.find({});
-      var acceptedTest = lodash.filter(test, x => x.req_status === "Accepted")
-      if (acceptedTest) {
-        let acceptedReq = new resultsModel({
-          _id: mongoose.Types.ObjectId(),
-          accepted_requests: acceptedTest
-        })
-        // acceptedReq.accepted_requests.push(acceptedTest);
-        await acceptedReq.save();
-        resp.status(200).json(acceptedReq.accepted_requests);
-      }
+      const { req_id } = req.body
+      let selectedReq = await RequestsModel.findOne({ _id: req_id });
+      selectedReq.req_status = "Accepted";
+      selectedReq.save();
+      let acceptedReq = new resultsModel({
+        _id: mongoose.Types.ObjectId(),
+        result_file_id: "NULL",
+        accepted_request: selectedReq
+
+      })
+      await acceptedReq.save();
+      resp.status(200).json(acceptedReq);
     } catch (err) {
       resp.status(400).json(" error finding accepted requests ");
-
     }
   })
+
+
 
 
 
