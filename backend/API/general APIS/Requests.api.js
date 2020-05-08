@@ -162,8 +162,8 @@ module.exports = function (app) {
   });
   app.post("/reqpatientinfo", async (req, resp) => {
     try {
-      const { req_id } = req.body;
-      let SelectedRequest = await RequestsModel.findOne({ _id: req_id });
+      const { r_id } = req.body;
+      let SelectedRequest = await RequestsModel.findOne({ _id: r_id });
       if (SelectedRequest) {
         let p_id = SelectedRequest.req_p_id;
         let SelectedPatient = await PatientsModel.findOne({ _id: p_id });
