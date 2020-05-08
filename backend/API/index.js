@@ -7,6 +7,8 @@ function RunAPIS(app) {
     require('./general APIS/Categories.api')(app)
     require('./Dashboard APIS/AdminAuth.api')(app)
     require('./general APIS/Requests.api')(app)
+    require('./fileUpload.api')(app)
+
 
 
 

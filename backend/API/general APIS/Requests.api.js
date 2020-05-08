@@ -102,9 +102,6 @@ module.exports = function (app) {
         await acceptedReq.save();
         resp.status(200).json(acceptedReq.accepted_requests);
       }
-
-
-
     } catch (err) {
       resp.status(400).json(" error finding accepted requests ");
 
