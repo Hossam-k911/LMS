@@ -172,6 +172,15 @@ module.exports = function (app) {
     let Req = await RequestsModel.find({});
     resp.json(Req);
   });
+  // app.get("/getreqs", async (req, resp) => {
+  //   try {
+  //     let Req = await ResultModel.find({});
+  //     resp.status(200).json(Req);
+  //   } catch (err) {
+  //     resp.status(400).json("error getting requests ");
+  //   }
+
+  // });
 
   app.post("/patientreq", async (req, resp) => {
     try {

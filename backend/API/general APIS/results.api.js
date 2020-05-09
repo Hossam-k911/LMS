@@ -10,10 +10,13 @@ module.exports = function (app) {
             await SelectedResults.save();
             resp.status(200).json({ SelectedResults });
         } catch (err) {
-            resp.status(400).json(" error getting requests for this Patient ");
+            resp.status(400).json(" error  ");
         }
     });
-
+    app.get("/getreqs", async (req, resp) => {
+        let request = await ResultModel.find({});
+        resp.status(200).json(request);
+    });
 
 
 

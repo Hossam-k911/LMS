@@ -62,6 +62,12 @@ function Authenticate(req, resp, next) {
 
 dbConnection();
 runAPIS(app);
+
+app.get("/", (req, resp) => {
+  resp.send("LMS IS CREATED .............");
+
+  // resp.render('index');
+});
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Started up at port ${port}`);

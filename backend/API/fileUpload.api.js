@@ -7,6 +7,7 @@ const crypto = require("crypto");
 const GridFsStorage = require("multer-gridfs-storage");
 module.exports = function fileUpload(app) {
     const mongoURI = "mongodb+srv://LMS_db:123@cluster0-2uup7.mongodb.net/test?retryWrites=true&w=majority"
+    // const mongoURI = "mongodb://localhost:27017/LMS"
 
     const conn = mongoose.createConnection(mongoURI);
     let gfs;
