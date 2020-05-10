@@ -89,36 +89,20 @@ module.exports = function (app) {
   });
 
 
-  // app.get("/accepted", async (req, resp) => {
-  //   try {
-  //     let test = await RequestsModel.find({});
-  //     var acceptedTest = lodash.filter(test, x => x.req_status === "Accepted")
-  //     //acceptedTest[0]._id
-  //      // result f array
-  //     if (acceptedTest) {
+  app.get("/accepted", async (req, resp) => {
+    try {
+      let test = await RequestsModel.find({});
+      var acceptedTest = lodash.filter(test, x => x.req_status === "Accepted")
 
-  //         let existedRes =  await resultsModel.findOne()
+      if (acceptedTest) {
 
-  //       for (i = 0; i < acceptedTest.length; i++) {
-  //         var acceptedReq = new resultsModel({
-  //           _id: mongoose.Types.ObjectId(),
-  //           result_file_id: "NULL",
-  //           accepted_request: {}
+        resp.status(200).json(acceptedTest);
+      }
+    } catch (err) {
+      resp.status(400).json(" error finding accepted requests ");
 
-  //         })
-  //         acceptedReq.accepted_request = acceptedTest[i];
-  //         await acceptedReq.save();
-  //       }
-
-  //       // acceptedReq.accepted_requests.push(acceptedTest);
-
-  //       resp.status(200).json({ acceptedReq });
-  //     }
-  //   } catch (err) {
-  //     resp.status(400).json(" error finding accepted requests ");
-
-  //   }
-  // })
+    }
+  })
 
 
 
@@ -172,6 +156,12 @@ module.exports = function (app) {
     let Req = await RequestsModel.find({});
     resp.json(Req);
   });
+  // app.get("/getaccepted", async (req, resp) => {
+  //   let acceptedStatus = "Accepted";
+  //   let Req = await RequestsModel.find({});
+  //   resp.json(Req);
+  // });
+
   // app.get("/getreqs", async (req, resp) => {
   //   try {
   //     let Req = await ResultModel.find({});
