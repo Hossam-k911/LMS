@@ -39,7 +39,7 @@ module.exports = function fileUpload(app) {
     const upload = multer({ storage });
 
     app.post('/upload', upload.single('file'), (req, resp) => {
-        resp.json({ file: req.file });
+        resp.json(req.file);
 
     })
     app.get('/files', (req, resp) => {
