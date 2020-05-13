@@ -12,7 +12,7 @@ const jwt = require("jsonwebtoken");
 
 const methodOverride = require('method-override');
 
-// app.set('view engine', 'ejs');
+app.set('view engine', 'ejs');
 //// MiddleWare
 app.use(cors());
 
@@ -64,9 +64,9 @@ dbConnection();
 runAPIS(app);
 
 app.get("/", (req, resp) => {
-  resp.send("LMS IS CREATED .............");
+  // resp.send("LMS IS CREATED .............");
 
-  // resp.render('index');
+  resp.render('index');
 });
 const port = process.env.PORT || 3000;
 app.listen(port, () => {

@@ -14,7 +14,7 @@ module.exports = function fileUpload(app) {
 
     conn.once('open', () => {
         gfs = Grid(conn.db, mongoose.mongo);
-        gfs.collection('uploads');
+        gfs.collection('fs');
     })
 
 
@@ -29,7 +29,7 @@ module.exports = function fileUpload(app) {
                     const filename = buf.toString('hex') + path.extname(file.originalname);
                     const fileInfo = {
                         filename: filename,
-                        bucketName: 'uploads'
+                        bucketName: 'fs'
                     };
                     resolve(fileInfo);
                 });
@@ -54,7 +54,7 @@ module.exports = function fileUpload(app) {
         })
     })
     app.delete('/delfile/:id', (req, resp) => {
-        gfs.remove({ _id: req.params.id, root: 'uploads' }, (err, gridStore) => {
+        gfs.remove({ _id: req.params.id, root: 'fs' }, (err, gridStore) => {
             if (err) {
                 return resp.status(404).json({ err: err });
             }
