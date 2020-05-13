@@ -48,6 +48,7 @@ module.exports = function fileUpload(app) {
                 return resp.status(404).json({
                     err: 'No files '
                 });
+
             }
             return resp.json(files);
         })
