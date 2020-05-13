@@ -116,7 +116,8 @@ module.exports = function (app) {
         _id: mongoose.Types.ObjectId(),
         result_file_id: "NULL",
         accepted_request: selectedReq,
-        acc_id: req_id
+        acc_id: req_id,
+        result_file_name: ""
 
       })
       await acceptedReq.save();

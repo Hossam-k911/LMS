@@ -5,9 +5,11 @@ module.exports = function (app) {
 
     app.post("/addfile", async (req, resp) => {
         try {
-            const { res_id, file_id } = req.body;
+            const { res_id, file_id, file_name } = req.body;
             let SelectedResults = await ResultModel.findOne({ _id: res_id });
             SelectedResults.result_file_id = file_id;
+            SelectedResults.result_file_name = file_name;
+
             await SelectedResults.save();
             resp.status(200).json(SelectedResults);
         } catch (err) {
