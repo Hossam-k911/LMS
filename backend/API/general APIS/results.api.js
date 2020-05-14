@@ -1,5 +1,7 @@
 var mongoose = require("mongoose");
 var ResultModel = require("../../Models/MedicalModels/results.model")
+var patientModel = require("../../Models/MedicalModels/patient.model")
+
 var lodash = require('lodash')
 module.exports = function (app) {
 
@@ -41,7 +43,24 @@ module.exports = function (app) {
     })
 
 
+    app.post("/addresulttopatient", async (req, resp) => {
+        try {
+            const { p_id, res_id } = req.body;
+            let medicine = await ResultModel.findOne({ _id: res_id });
+            if (medicine) {
+                let SelectedPatient = await patientModel.findOne({ _id: p_id });
+                if (SelectedPatient) {
+                    SelectedPatient.results.push(res_id);
+                }
+                await SelectedPatient.save();
+                resp.status(200).json(SelectedPatient);
+            }
 
+
+        } catch (err) {
+            resp.status(400).send("error in Updating Medicines");
+        }
+    });
 
     app.get("/accepted", async (req, resp) => {
         try {
