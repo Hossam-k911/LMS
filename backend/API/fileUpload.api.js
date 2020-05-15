@@ -42,6 +42,12 @@ module.exports = function fileUpload(app) {
         resp.json({ file: req.file });
 
     })
+    app.post('/download', (req, res) => {
+        filepath = path.join(__dirname, "../fs") + '/' + req.body.filename;
+        res.sendFile(filepath);
+    })
+
+
     app.get('/files', (req, resp) => {
         gfs.files.find().toArray((err, files) => {
             if (!files || files.length === 0) {
@@ -72,9 +78,6 @@ module.exports = function fileUpload(app) {
     //         }
     //     })
     // })
-    app.post('/download', (req, res) => {
-        filepath = path.join(__dirname, "../fs") + '/' + req.body.filename;
-        res.sendFile(filepath);
-    })
+
 
 }
