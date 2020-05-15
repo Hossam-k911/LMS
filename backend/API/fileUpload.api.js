@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const multer = require("multer")
-
+const uploadFolder = __basedir + '/fs/';
 const Grid = require('gridfs-stream');
 const path = require("path");
 const crypto = require("crypto");
@@ -42,11 +42,14 @@ module.exports = function fileUpload(app) {
         resp.json({ file: req.file });
 
     })
-    app.post('/download', (req, res) => {
-        filepath = path.join(__dirname, "../fs") + '/' + req.body.filename;
-        res.sendFile(filepath);
+    // app.post('/download', (req, res) => {
+    //     filepath = path.join(__dirname, "../fs") + '/' + req.body.filename;
+    //     res.sendFile(filepath);
+    // })
+    app.post('/down', (req, resp) => {
+        var filename = req.params.filename;
+        resp.download(uploadFolder + filename);
     })
-
 
     app.get('/files', (req, resp) => {
         gfs.files.find().toArray((err, files) => {
