@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const multer = require("multer")
-const uploadFolder = __basedir + '/fs/';
+
 const Grid = require('gridfs-stream');
 const path = require("path");
 const crypto = require("crypto");
@@ -11,7 +11,7 @@ module.exports = function fileUpload(app) {
 
     const conn = mongoose.createConnection(mongoURI);
     let gfs;
-    // var picPath = path.resolve(__dirname, 'public');
+
     conn.once('open', () => {
         gfs = Grid(conn.db, mongoose.mongo);
         gfs.collection('fs');
@@ -42,15 +42,6 @@ module.exports = function fileUpload(app) {
         resp.json({ file: req.file });
 
     })
-    // app.post('/download', (req, res) => {
-    //     filepath = path.join(__dirname, "../fs") + '/' + req.body.filename;
-    //     res.sendFile(filepath);
-    // })
-    app.post('/down', (req, resp) => {
-        var filename = req.params.filename;
-        resp.download(uploadFolder + filename);
-    })
-
     app.get('/files', (req, resp) => {
         gfs.files.find().toArray((err, files) => {
             if (!files || files.length === 0) {
@@ -70,17 +61,6 @@ module.exports = function fileUpload(app) {
         })
         return resp.json("success");
     })
-    // app.post('/download/:id', (req, res) => {
-    //     gfs.find({ _id: req.params.id }, (err, data) => {
-    //         if (err) {
-    //             console.log(err)
-    //         }
-    //         else {
-    //             var path = __dirname + '/public/' + data[0].picspath;
-    //             res.download(path);
-    //         }
-    //     })
-    // })
 
 
 }
