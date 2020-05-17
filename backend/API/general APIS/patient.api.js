@@ -39,7 +39,7 @@ module.exports = function createPatientsAPIS(app) {
 
 
 
-  app.put(`/editmedicine/:id`, async (req, resp) => {
+  app.put(`/editpatient/:id`, async (req, resp) => {
     try {
       const { id } = req.params;
       patientModel.findOne({ _id: id }, function (err, foundObject) {
