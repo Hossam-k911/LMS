@@ -11,6 +11,14 @@ module.exports = function createPatientsAPIS(app) {
       resp.status(400).send("error in getting patients");
     }
   });
+  app.get("/haha", async (req, resp) => {
+    try {
+      let patients = await patientModel.find({});
+      resp.status(200).send(patients);
+    } catch (err) {
+      resp.status(400).send("error in getting patients");
+    }
+  });
   //get patient by ID
   app.get("/getpatient/:p_id", async (req, resp) => {
     try {
