@@ -39,9 +39,9 @@ module.exports = function createPatientsAPIS(app) {
 
 
 
-  app.put("/editpatient/:id", async (req, resp) => {
+  app.put(`/editmedicine/:id`, async (req, resp) => {
     try {
-      var id = req.params.id;
+      const { id } = req.params;
       patientModel.findOne({ _id: id }, function (err, foundObject) {
         if (err) {
           resp.status(500).json("error 1");
