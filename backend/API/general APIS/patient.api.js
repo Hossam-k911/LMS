@@ -12,9 +12,9 @@ module.exports = function createPatientsAPIS(app) {
     }
   });
   //get patient by ID
-  app.post("/getpatient", async (req, resp) => {
+  app.get("/getpatient/:p_id", async (req, resp) => {
     try {
-      const { p_id } = req.body;
+      const { p_id } = req.params;
       let patients = await patientModel.find({ _id: p_id });
       resp.status(200).send(patients[0]);
     } catch (err) {
