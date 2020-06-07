@@ -3,6 +3,7 @@ var patientModel = require("../../Models/MedicalModels/patient.model");
 var medicinesModel = require("../../Models/MedicalModels/medicines.model");
 
 module.exports = function createPatientsAPIS(app) {
+  //add new medicine 
   app.post("/addmedicine", async (req, resp) => {
     try {
       const {
@@ -29,6 +30,8 @@ module.exports = function createPatientsAPIS(app) {
       resp.status(400).json("error adding medecine");
     }
   });
+
+  //get all medicines 
   app.get("/getmedicines", async (req, resp) => {
     try {
       let medicines = await medicinesModel.find({});
@@ -37,6 +40,8 @@ module.exports = function createPatientsAPIS(app) {
       resp.status(400).json("error fetching medicines");
     }
   });
+
+  //add medicine to patient's medicines list 
   app.post("/addmedecinetopatient", async (req, resp) => {
     try {
       const { p_id, m_id } = req.body;
@@ -57,6 +62,9 @@ module.exports = function createPatientsAPIS(app) {
       resp.status(400).send("error in Updating Medicines");
     }
   });
+
+
+  //delete medicine 
   app.post("/delmedicine", async (req, resp) => {
     try {
       const { m_id } = req.body
@@ -67,6 +75,7 @@ module.exports = function createPatientsAPIS(app) {
     }
   });
 
+  //get medicine by id  
   app.get(`/getMedicinebyid/:m_id`, async (req, resp) => {
     try {
       const { m_id } = req.params;
@@ -80,6 +89,7 @@ module.exports = function createPatientsAPIS(app) {
     }
   })
 
+  // edit medicine   
   app.put(`/editmedicine/:m_id`, async (req, resp) => {
     try {
       const { m_id } = req.params;
@@ -117,4 +127,5 @@ module.exports = function createPatientsAPIS(app) {
       });
     } catch (err) { }
   });
+
 };

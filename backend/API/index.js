@@ -9,9 +9,5 @@ function RunAPIS(app) {
     require('./general APIS/Requests.api')(app)
     require('./general APIS/results.api')(app)
     require('./fileUpload.api')(app)
-
-
-
-
 }
 module.exports = RunAPIS

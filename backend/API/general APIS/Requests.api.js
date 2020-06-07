@@ -5,8 +5,8 @@ var PatientsModel = require("../../Models/MedicalModels/patient.model");
 var lodash = require("lodash")
 var resultsModel = require("../../Models/MedicalModels/results.model")
 
-// var _ = require("lodash");
 module.exports = function (app) {
+  //making medical analysis test  request 
   app.post("/addreq", async (req, resp) => {
     try {
       const {
@@ -47,7 +47,7 @@ module.exports = function (app) {
       });
       let Selectedcategory = await CategoriesModel.findOne({ _id: c_id });
       var cat = Selectedcategory.category_title;
-      // let SelectedTest = Selectedcategory.category_medical_tests[0];
+
       var test = lodash.filter(Selectedcategory.category_medical_tests, x => x.id === t_id)
       if (test) {
         var testPeriod = test[0].test_period;
@@ -64,12 +64,7 @@ module.exports = function (app) {
         Request.req_testDesc = testDesc
 
       }
-      // if (SelectedTest.id == t_id) {
 
-
-      // } else {
-      //   resp.status(400).json("check test ID");
-      // }
       await Request.save();
       let SelectedPatient = await PatientsModel.findOne({ _id: req_p_id });
       if (SelectedPatient) {
@@ -78,7 +73,6 @@ module.exports = function (app) {
         Request.req_p_phone = SelectedPatient.phone;
         await Request.save();
         SelectedPatient.requests.push(Request.id);
-        // SelectedPatient.requests_name.push(Request.req_test);
         await SelectedPatient.save();
       }
 
@@ -88,7 +82,7 @@ module.exports = function (app) {
     }
   });
 
-
+  // getting only accepted requests 
   app.get("/accepted", async (req, resp) => {
     try {
       let test = await RequestsModel.find({});
@@ -105,7 +99,7 @@ module.exports = function (app) {
   })
 
 
-
+  // Accepting request
   app.post("/acceptreq", async (req, resp) => {
     try {
       const { req_id } = req.body
@@ -126,6 +120,7 @@ module.exports = function (app) {
       resp.status(400).json(" error finding accepted requests ");
     }
   })
+  //Rejecting request 
   app.post("/rejectreq", async (req, resp) => {
     try {
       const { req_id } = req.body
@@ -138,6 +133,7 @@ module.exports = function (app) {
       resp.status(400).json(" error finding accepted requests ");
     }
   })
+  // Pend request
   app.post("/pendreq", async (req, resp) => {
     try {
       const { req_id } = req.body
@@ -153,27 +149,13 @@ module.exports = function (app) {
 
 
 
-
+  //get all requests 
   app.get("/getreq", async (req, resp) => {
     let Req = await RequestsModel.find({});
     resp.json(Req);
   });
-  // app.get("/getaccepted", async (req, resp) => {
-  //   let acceptedStatus = "Accepted";
-  //   let Req = await RequestsModel.find({});
-  //   resp.json(Req);
-  // });
 
-  // app.get("/getreqs", async (req, resp) => {
-  //   try {
-  //     let Req = await ResultModel.find({});
-  //     resp.status(200).json(Req);
-  //   } catch (err) {
-  //     resp.status(400).json("error getting requests ");
-  //   }
-
-  // });
-
+  //get all requests for specific patient 
   app.post("/patientreq", async (req, resp) => {
     try {
       const { p_id } = req.body;
@@ -184,6 +166,8 @@ module.exports = function (app) {
       resp.status(400).json(" error getting requests for this Patient ");
     }
   });
+
+  //knowing patient who did this request {unused api } 
   app.post("/reqpatientinfo", async (req, resp) => {
     try {
       const { r_id } = req.body;
@@ -198,6 +182,8 @@ module.exports = function (app) {
     }
   });
 
+
+  //delete request  from requests model and patient's requests list 
   app.post("/delrequest", async (req, resp) => {
     try {
       const { req_id, p_id } = req.body;
@@ -223,13 +209,14 @@ module.exports = function (app) {
     }
   });
 
+  //delete all  requests 
   app.get("/delRequests", async (req, resp) => {
     let output = await RequestsModel.remove({});
     resp.json(output);
   });
 
 
-
+  //edit request 
   app.put("/editreq", async (req, resp) => {
     try {
       const { req_id } = req.body;

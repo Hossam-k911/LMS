@@ -1,8 +1,8 @@
-var mongoose = require("mongoose");
 var patientModel = require("../../Models/MedicalModels/patient.model");
-var MedecinesModel = require("../../Models/MedicalModels/medicines.model");
 
 module.exports = function createPatientsAPIS(app) {
+
+  //get all patients 
   app.get("/getpatients", async (req, resp) => {
     try {
       let patients = await patientModel.find({});
@@ -11,14 +11,7 @@ module.exports = function createPatientsAPIS(app) {
       resp.status(400).send("error in getting patients");
     }
   });
-  app.get("/haha", async (req, resp) => {
-    try {
-      let patients = await patientModel.find({});
-      resp.status(200).send(patients);
-    } catch (err) {
-      resp.status(400).send("error in getting patients");
-    }
-  });
+
   //get patient by ID
   app.get("/getpatient/:p_id", async (req, resp) => {
     try {
@@ -30,6 +23,7 @@ module.exports = function createPatientsAPIS(app) {
     }
   });
 
+  //remove patient
   app.post("/removepatient", async (req, resp) => {
     try {
       const { p_id } = req.body;
@@ -40,13 +34,14 @@ module.exports = function createPatientsAPIS(app) {
     }
   });
 
+  //remove all patients {reset model}
   app.get("/removeallpatients", async (req, resp) => {
     let output = await patientModel.remove({});
     resp.json({ message: "success", result: output });
   });
 
 
-
+  //edit patient data 
   app.put(`/editpatient/:id`, async (req, resp) => {
     try {
       const { id } = req.params;
@@ -99,39 +94,5 @@ module.exports = function createPatientsAPIS(app) {
       });
     } catch (err) { }
   });
-  // app.post("/updatepatient", async (req, resp) => {
-  //   try {
-  //     const {
-  //       p_id,
-  //       firstName,
-  //       lastName,
-  //       email,
-  //       password,
-  //       phone,
-  //       gender,
-  //       location,
-  //       date,
-  //       medicines: m_id
-  //     } = req.body;
 
-  //     let output = await patientModel.findOneAndUpdate(
-  //       { _id: p_id },
-  //       {
-  //         firstName,
-  //         lastName,
-  //         email,
-  //         password,
-  //         phone,
-  //         gender,
-  //         location,
-  //         date,
-  //         m_id
-  //       }
-  //     );
-  //     await output.save();
-  //     resp.status(200).json(output);
-  //   } catch (err) {
-  //     resp.status(400).json("error in editing patient");
-  //   }
-  // });
 };

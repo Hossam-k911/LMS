@@ -1,10 +1,10 @@
-var mongoose = require("mongoose");
 var ResultModel = require("../../Models/MedicalModels/results.model")
 var patientModel = require("../../Models/MedicalModels/patient.model")
 
 var lodash = require('lodash')
 module.exports = function (app) {
 
+    //add result file for an accepted medical test 
     app.post("/addfile", async (req, resp) => {
         try {
             const { res_id, file_id, file_name } = req.body;
@@ -18,17 +18,21 @@ module.exports = function (app) {
             resp.status(400).json(" error  ");
         }
     });
+
+    //get all  results 
     app.get("/getreqs", async (req, resp) => {
         let request = await ResultModel.find({});
         resp.status(200).json(request);
     });
 
-
+    //remove all results 
     app.get("/removeresults", async (req, resp) => {
         await ResultModel.remove({});
         resp.status(200).json("success");
 
     })
+
+    // get result by specific accepted request 
     app.post("/resbyaccid", async (req, resp) => {
         try {
             const { acc_id } = req.body
@@ -42,7 +46,7 @@ module.exports = function (app) {
         }
     })
 
-
+    // add result to patient's results list 
     app.post("/addresulttopatient", async (req, resp) => {
         try {
             const { p_id, res_id } = req.body;
@@ -62,6 +66,7 @@ module.exports = function (app) {
         }
     });
 
+    //{duplicated }
     app.get("/accepted", async (req, resp) => {
         try {
             let test = await RequestsModel.find({});

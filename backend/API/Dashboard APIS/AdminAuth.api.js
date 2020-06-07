@@ -4,6 +4,8 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 module.exports = function(app) {
+
+  //token generation function
   function generateAccessToken() {
     const token = jwt.sign(
       {
@@ -14,6 +16,8 @@ module.exports = function(app) {
     );
     return token;
   }
+
+  //sign up new admin
   app.post("/dashboard/signup", async (req, resp) => {
     try {
       const { email, password } = req.body;
@@ -29,6 +33,8 @@ module.exports = function(app) {
 
     }
   });
+
+  //sign in existed admin in users model
   app.post("/dashboard/signin", async (req, resp) => {
     let user = await adminModel.findOne({
       email: req.body.email,

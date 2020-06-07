@@ -1,8 +1,10 @@
 var PatientsModel = require("../../Models/MedicalModels/patient.model");
 const jwt = require("jsonwebtoken");
-// const bcrypt = require("bcryptjs");
+
+
 require("dotenv").config();
 module.exports = function (app) {
+  //token generation function
   function generateAccessToken() {
     const token = jwt.sign(
       {
@@ -13,6 +15,8 @@ module.exports = function (app) {
     );
     return token;
   }
+
+  //signin existed patient
   app.post("/signin", async (req, resp) => {
     let user = await PatientsModel.findOne({
       email: req.body.email,

@@ -21,6 +21,8 @@ module.exports = function categoriesAPI(app) {
       resp.status(400).json("error adding Category");
     }
   });
+
+  //Edit Existed Medical Category {unused api in dashboard}
   app.put(`/editcategory`, async (req, resp) => {
     try {
       const { cat_id } = req.body;
@@ -49,11 +51,15 @@ module.exports = function categoriesAPI(app) {
       });
     } catch (err) { }
   });
+
+
   // Fetching all categories from Categories Collection
   app.get("/listcategories", async (req, resp) => {
     let categories = await CategoriesModel.find({});
     resp.json(categories);
   });
+
+  //get category by id 
   app.get(`/getcategorybyid/:cat_id`, async (req, resp) => {
     try {
       const { cat_id } = req.params;
@@ -67,6 +73,7 @@ module.exports = function categoriesAPI(app) {
   })
 
 
+  // get medical analysis precautions 
   app.post(`/getprecautions/:cat_id`, async (req, resp) => {
     try {
       const { cat_id } = req.params;
@@ -80,10 +87,10 @@ module.exports = function categoriesAPI(app) {
       }
 
     } catch (err) {
-      resp.status(400).json("error fetching Category .. check category ID");
-
+      resp.status(400).json("error fetching Category .. check category ID")
     }
   })
+
 
   // add new Medical test to specific category
   app.post("/addtest", async (req, resp) => {

@@ -1,6 +1,8 @@
 var mongoose = require("mongoose");
 var HospitalModel = require("../../Models/MedicalModels/hospital.model");
 module.exports = function (app) {
+
+  //assign hospital or laboratory data to show in mob
   app.post("/hospitaldata", async (req, resp) => {
     try {
       const {
@@ -37,6 +39,7 @@ module.exports = function (app) {
     }
   });
 
+  //get hospital data 
   app.get("/hospitalinfo", async (req, resp) => {
     let hospital = await HospitalModel.findOne({});
     resp.json(hospital);
@@ -49,11 +52,13 @@ module.exports = function (app) {
       resp.status(200).json(hospital);
 
     } catch (err) {
-      resp.status(400).json("error fetching medicine check medicine ID ");
+      resp.status(400).json("error");
 
     }
   })
 
+
+  //edit hospital data 
   app.put("/edithospital", async (req, resp) => {
     try {
       const { hos_id } = req.body;
