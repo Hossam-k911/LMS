@@ -42,6 +42,11 @@ module.exports = function fileUpload(app) {
         resp.json({ file: req.file });
 
     })
+
+    app.post('/download', function (req, res, next) {
+        filepath = path.join(__dirname, '../fs') + '/' + req.body.filename;
+        res.sendFile(filepath);
+    });
     app.get('/files', (req, resp) => {
         gfs.files.find().toArray((err, files) => {
             if (!files || files.length === 0) {
